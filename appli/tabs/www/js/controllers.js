@@ -23,9 +23,9 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-<<<<<<< HEAD
+
 .controller('PlanningCtrl', function($scope) {})
-=======
+
 .controller('MapController', function($scope, $ionicLoading) {
   google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);
@@ -51,7 +51,7 @@ angular.module('starter.controllers', [])
     }); 
    
 })
->>>>>>> origin/master
+
 
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
