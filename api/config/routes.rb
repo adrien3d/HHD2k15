@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   namespace :api, :defaults => {format: 'json'} do
     namespace :v1 do
       post '/auth' => 'user#get_token'
-      resources :user, except: [:index, :delete, :new]
-      resources :guide, except: [:index, :delete, :new]
+      resources :user, except: [:index, :delete, :new, :edit]
     end
   end
 end
