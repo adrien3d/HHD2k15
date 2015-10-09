@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '$BluetoothLePlugin'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -20,6 +20,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
+
+
   });
 })
 
@@ -100,6 +102,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
+<<<<<<< HEAD
   $urlRouterProvider.otherwise('/tab/home');
+=======
+  /*$urlRouterProvider.otherwise('/tab/dash');
+      var params = {
+        request: true,
+        time : 10000 //in milliseconds, time to scan defaults to 5000ms if not provided
+      };
 
-});
+  $cordovaBluetoothle.startScan(params).then(function(success) {
+    console.log(device.name);
+    console.log(device.address);
+  });*/
+})
+
+>>>>>>> origin/master
+
