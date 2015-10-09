@@ -42,3 +42,9 @@ Pareil que patch
 ---
 # DELETE	/api/v1/user/:id
 Supprime un utilisateur (id dans l'adresse)
+
+## POST	/api/v1/user/search
+---
+Utilisé pour chercher un utilisateur
+
+email
