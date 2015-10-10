@@ -72,6 +72,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       }
     })
+
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {
@@ -98,6 +99,56 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       'tab-account': {
         templateUrl: 'templates/tab-account.html',
         controller: 'AccountCtrl'
+      }
+    }
+  })
+
+   .state('tab.groupes', {
+    url: '/groupes',
+    views: {
+      'tab-groupes': {
+        templateUrl: 'templates/tab-groupes.html',
+        controller: 'GroupesCtrl'
+      }
+    }
+  })
+
+    .state('tab.historique', {
+    url: '/historique',
+    views: {
+      'tab-historique': {
+        templateUrl: 'templates/tab-historique.html',
+        controller: 'HistoriqueCtrl'
+      }
+    }
+  }) 
+
+.state('tab.gestioncompte', {
+    url: '/gestioncompte',
+    views: {
+      'tab-gestioncompte': {
+        templateUrl: 'templates/tab-gestioncompte.html',
+        controller: 'GestionCompteCtrl'
+      }
+    }
+  })
+
+.state('tab.parametres', {
+    url: '/parametres',
+    views: {
+      'tab-parametres': {
+        templateUrl: 'templates/tab-parametres.html',
+        controller: 'ParametresCtrl'
+      }
+    }
+  }) 
+
+ .state('tab.apropos', {
+    url: '/apropos',
+    views: {
+      'tab-apropos': {
+        templateUrl: 'templates/tab-apropos.html',
+        controller: 'AproposCtrl'
       }
     }
   });
