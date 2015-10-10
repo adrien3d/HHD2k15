@@ -20,7 +20,11 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "com.ionic.keyboard",
-    "com.megster.cordova.ble"
+    "com.megster.cordova.ble",
+    {
+      "locator": "https://github.com/EddyVerbruggen/Calendar-PhoneGap-Plugin.git",
+      "id": "cordova-plugin-calendar"
+    }
   ],
   "cordovaPlatforms": [
     "ios",
