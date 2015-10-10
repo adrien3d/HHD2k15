@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151010082621) do
+ActiveRecord::Schema.define(version: 20151010095840) do
 
   create_table "invites", force: :cascade do |t|
     t.integer  "user_id"
@@ -21,11 +21,11 @@ ActiveRecord::Schema.define(version: 20151010082621) do
   end
 
   create_table "user_positions", force: :cascade do |t|
-    t.string   "longitude"
-    t.string   "latitude"
+    t.decimal  "longitude",  precision: 15, scale: 13
+    t.decimal  "latitude",   precision: 15, scale: 13
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 20151010082621) do
     t.string   "lieu"
     t.integer  "user_status",            default: 0
     t.string   "face",                   default: "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"
+    t.integer  "facebook_id"
+    t.string   "access_token"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token"
