@@ -5,7 +5,7 @@ class Api::V1::UserController < Api::V1::ApiController
     user = User.find_by_email(params[:email])
     if user
       if user.valid_password?(params[:password])
-        render status: 200, json: {token: user.authentication_token, email: user.email, id: user.id}
+        render status: 200, json: {token: user.authentication_token, email: user.email}
       else
         render status: 500, json: {error: "Incorrect password"}
       end
