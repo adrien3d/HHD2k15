@@ -106,13 +106,15 @@ angular.module('starter.controllers', [])
 .controller('AproposCtrl', function($scope) {})
 
 .controller('LoginCtrl', function($scope, $ionicPopup, $state) {
-    if (window.localStorage['user'] != null)
+    if (window.localStorage['user'] != 'null')
     {
         //user connecté
         $state.go('tab.home');
     }
 })
 
+.controller('SigninCtrl', function($scope, $http, $state) {
+})
 .controller('SignupCtrl', function($scope, $http, $state) {
  $scope.signupEmail = function(email, password, firstname, lastname) {
         
@@ -150,8 +152,13 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('AccountCtrl', function($scope, $http) {
-        $http({
+.controller('AccountCtrl', function($scope, $http, $state) {
+     $scope.logout = function() {
+    
+        window.localStorage['user'] = 'null';
+        $state.go('login');
+    }
+     $http({
             method: 'POST',
             url: "http://46.101.218.111/api/v1/auth",
             headers: {
