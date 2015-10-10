@@ -8,25 +8,25 @@ app.factory('Chats', function() {
     id: 0,
     name: 'Maxence Henneron',
     lastText: 'You on your way?',
-    face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
+    face: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/005/073/292/1632362.jpg'
   }, {
     id: 1,
     name: 'Elie Alawoe',
     lastText: 'Hey, it\'s me',
-    face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
+    face: 'https://i.vimeocdn.com/portrait/8889425_300x300.jpg'
   }, {
     id: 2,
     name: 'Adrien Chapelet',
     lastText: 'I should buy a boat',
-    face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
+    face: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/005/062/3d9/3598455.jpg'
   }, {
     id: 3,
-    name: 'Sébastien Cockedey',
+    name: 'Sebastien Cockedey',
     lastText: 'Look at my mukluks!',
     face: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png'
   }, {
     id: 4,
-    name: 'Sébastien Merchez',
+    name: 'Sebastien Merchez',
     lastText: 'This is wicked good ice cream.',
     face: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png'
   }, {
@@ -58,19 +58,28 @@ app.factory('Chats', function() {
 app.factory('FriendsNearby', function() {
   var friends = [{
     id: 0,
+    type: 0,
     name: 'Maxence Henneron',
-    lastText: 'You on your way?',
-    face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
+    distance: 1200,
+    face: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/005/073/292/1632362.jpg'
   }, {
     id: 1,
+    type: 1,
     name: 'Elie Alawoe',
-    lastText: 'Hey, it\'s me',
-    face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
-  }, {
+    distance: 8200,
+    face: 'https://i.vimeocdn.com/portrait/8889425_300x300.jpg'
+  },{
     id: 2,
+    type: 1,
+    name: 'Sebastien Cockedey',
+    distance: 8200,
+    face: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/4/005/0ae/3ea/1144fd7.jpg'
+  }, {
+    id: 3,
+    type: 2,
     name: 'Adrien Chapelet',
-    lastText: 'I should buy a boat',
-    face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
+    distance: 15200,
+    face: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/005/062/3d9/3598455.jpg'
   }];
 
   return {
