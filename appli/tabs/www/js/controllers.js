@@ -30,9 +30,9 @@ angular.module('starter.controllers', [])
         method: 'POST',
         url: "http://46.101.218.111/api/v1/user/search",
         headers: {
-            ['Content-Type': 'application/x-www-form-urlencoded'],
-            ['X-User-Token':  JSON.parse(window.localStorage['user']).token],
-            ['X-User-Email': JSON.parse(window.localStorage['user']).email]
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-User-Token': JSON.parse(window.localStorage['user']).token,
+            'X-User-Email': JSON.parse(window.localStorage['user']).email
         },
         data: $.param({
             email:  $stateParams.email
@@ -55,7 +55,8 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('MapController', function($scope, $ionicLoading) {
+.controller('MapController', function($scope, $ionicLoading, FriendsNearby) {
+    $scope.friends = FriendsNearby.all();
     google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);
         var mapOptions = {
@@ -76,15 +77,12 @@ angular.module('starter.controllers', [])
     });
 })
 
-<<<<<<< HEAD
-=======
 /*.controller('AccountCtrl', function($scope) {
   $scope.settings = {
     //enableFriends: true
   };
 })*/
 
->>>>>>> origin/master
 .controller('GroupesCtrl', function($scope) {
 })
 
@@ -126,6 +124,14 @@ angular.module('starter.controllers', [])
             $("#token").text(token);
         }
     });
+})
+
+.controller('EventDetailCtrl', function($scope, Events) {  
+    $scope.evenemet = Events.get($stateParams.eventId);
+})
+
+.controller('AmiDetailCtrl', function($scope, $stateParams, Friends) {  
+    $scope.friend = Friends.get($stateParams.friendId);
 })
 
 .controller('CalendarCtrl', function ($scope, $cordovaCalendar) {

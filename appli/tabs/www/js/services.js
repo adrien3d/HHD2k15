@@ -102,6 +102,7 @@ app.factory('FriendsNearby', function() {
     }
   };
 });
+
 /*
 .service('LoginService', function($q) {
     return {

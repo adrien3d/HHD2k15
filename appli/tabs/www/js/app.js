@@ -165,6 +165,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
+ 
+ .state('tab.event-detail', {
+    url: '/planning/:eventID',
+    views: {
+      'tab-planning': {
+        templateUrl: 'templates/event-detail.html',
+        controller: 'EventDetailCtrl'
+      }
+    }
+  })
+
+  .state('tab.ami-detail', {
+    url: '/map/:friendID',
+    views: {
+      'tab-map': {
+        templateUrl: 'templates/ami-detail.html',
+        controller: 'AmiDetailCtrl'
+      }
+    }
+  })
+
 
 /*  .state('login', {
       url: '/login',
