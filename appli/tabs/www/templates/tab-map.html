@@ -66,8 +66,13 @@
             <button class="button button-block button-positive" ng-click="Invite(mailInvite)">Inviter</button>
             <hr>
 
-            <div ng-repeat="Invitation in Invitations">
-                <p>{{ Invitation.sender.first_name }} {{ Invitation.sender.last_name }}</p>
+            <div ng-repeat="Invitation in Invitations" class="margin-bottom:10px">
+                <img src="{{Invitation.sender.face}}" style="width:50px;height:50px;float:left;border-radius:24px;"/>
+                <p style="margin-top: 12px; float:left">
+                    {{ Invitation.sender.first_name }} {{ Invitation.sender.last_name }}
+                </p>
+                <button class="button button-small button-positive" style="float:right; margin-top:5px">Accepter</button>
+                <div style="clear:both;"></div>
             </div>
 
         </ion-content>
