@@ -59,7 +59,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('MapController', function($scope, $ionicLoading, FriendsNearby) {
+.controller('MapController', function($scope, $http, $ionicLoading, FriendsNearby) {
     $scope.friends = FriendsNearby.all();
     google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);

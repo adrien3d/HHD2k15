@@ -55,7 +55,30 @@ app.factory('Chats', function() {
 });
 
 
-app.factory('FriendsNearby', function() {
+app.factory('FriendsNearby', function($http) {
+
+  var data_headers =
+  {"Content-Type" : "application/x-www-form-urlencoded"};
+
+  console.log(data_headers);
+
+  console.log(JSON.parse(window.localStorage['user']).token);
+  $http.get(encodeURI('http://46.101.218.111/api/v1/user?user_email='+ JSON.parse(window.localStorage["user"]).email+'&user_token=' +JSON.parse(window.localStorage["user"]).token));
+    /*method: 'GET',
+    url: "http://46.101.218.111/api/v1/user",
+    headers: data_headers,
+    data: {
+      user_email: JSON.parse(window.localStorage["user"]).email,
+      user_token: JSON.parse(window.localStorage["user"]).token
+    }
+  }).success(function(data, status, a) {
+    if (status == 200)
+    {
+      console.log(data);
+
+    }
+  });*/
+
   var friends = [{
     id: 0,
     type: 0,
@@ -87,20 +110,10 @@ app.factory('FriendsNearby', function() {
       return friends;
     },
     getFromApi: function() {
-      $http({
-        method: 'POST',
-        url: "http://46.101.218.111/api/v1/nearby",
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-User-Token': JSON.parse(window.localStorage['user']).token
-        }
-    }).success(function(data, status, a) {
-        if (status == 200)
-        {
-            var UsersNearby = data.UsersNearby;
-            return FriendsNearby;
-        }
-    });
+      /*return $http.post("https://www.yoursite.com/users").then(function(response){
+        users = response;
+        return users;
+      });*/
     },
     get: function(friendId) {
       for (var i = 0; i < friends.length; i++) {
@@ -112,7 +125,6 @@ app.factory('FriendsNearby', function() {
     }
   };
 });
-
 /*
 .service('LoginService', function($q) {
     return {

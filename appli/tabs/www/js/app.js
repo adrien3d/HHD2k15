@@ -6,6 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
+
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material', 'ngCordova'])
 
 
@@ -53,8 +54,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   //       //}
   //       $scope.lieux="Inconnu";
 
+
   //       if(device.id == "86D46DF4-BF47-15B4-DFDB-AFB2EC7AD143" && device.rssi <90){
   //         $scope.lieux = "Plaine Image";
+
+
 
 
   //         //$state.go($state.current, {}, {reload: true});
@@ -63,6 +67,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   //       //$http.post("", {"lieux" : lieux});
   //     }, failure);
   //   }
+
+
 
    });
 })
