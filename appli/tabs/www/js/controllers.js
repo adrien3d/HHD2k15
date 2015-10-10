@@ -2,6 +2,8 @@ angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($state, $scope, FriendsNearby) {
 
+        console.log(JSON.parse(window.localStorage['user']).token); 
+
     navigator.geolocation.getCurrentPosition(function(position) {
         $scope.lat = position.coords.latitude;
         $scope.lng = position.coords.longitude;
@@ -97,11 +99,7 @@ angular.module('starter.controllers', [])
 })
 
 
-/*.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    //enableFriends: true
-  };
-})*/
+
 
 .controller('GroupesCtrl', function($scope) {})
 
@@ -124,7 +122,7 @@ angular.module('starter.controllers', [])
 
 //connexion
 .controller('SigninCtrl', function($scope, $http, $state) {
-     $scope.signupEmail = function(email, password) {
+     $scope.loginEmail = function(email, password) {
       $http({
             method: 'POST',
             url: "http://46.101.218.111/api/v1/auth",
@@ -210,11 +208,45 @@ angular.module('starter.controllers', [])
         window.localStorage['user'] = 'null';
         $state.go('login');
     }
-   
-    })
+
+    // $http.get('http://46.101.218.111/api/v1/profile/?').then(function(resp) {
+    //     console.log('Success', resp);
+    //     // For JSON responses, resp.data contains the result
+    //   }, function(err) {
+    //     console.error('ERR', err);
+    //     // err.status will contain the status code
+    //   })
+
+
+    // $http({
+    //             method: 'GET',
+    //             url: "http://46.101.218.111/api/v1/profile",
+    //             headers: {
+    //                 'Content-Type': 'application/x-www-form-urlencoded'
+    //             },
+    //             data: $.param({
+    //                 'user_email': JSON.parse(window.localStorage["user"]).email,
+    //                 'user_token': JSON.parse(window.localStorage["user"]).token
+    //             })
+    //         }).success(function(data, status) {
+    //             console.log(data);
+    //             if (status == 200) {
+    //                 alert("Tout va bien");
+                    
+    //             }else{
+    //                 alert("Problème");
+    //                 alert(data);
+    //             }
+    //         }).error(function(data, status) {
+    //             alert("Problème xhr");
+    //             alert(data);
+    //         });
+    $scope.user_name = "couco";   
+})
+
     .controller('EventDetailCtrl', function($scope, Events) {
         $scope.evenemet = Events.get($stateParams.eventId);
-    })
+})
 
 .controller('AmiDetailCtrl', function($scope, $stateParams, Friends) {
     $scope.friend = Friends.get($stateParams.friendId);
