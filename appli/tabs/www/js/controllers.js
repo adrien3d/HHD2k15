@@ -7,7 +7,7 @@ angular.module('starter.controllers', [])
         $scope.lng = position.coords.longitude;
     });
 
-    $scope.friends = FriendsNearby.all($scope.lat, $scope.lng);
+    //$scope.friends = FriendsNearby.all($scope.lat, $scope.lng);
 
     FriendsNearby.all().then(function(data) {
             $scope.friends = data;
@@ -75,6 +75,7 @@ angular.module('starter.controllers', [])
 
 .controller('MapController', function($scope, $http, $ionicLoading, FriendsNearby) {
     $scope.friends = FriendsNearby.all();
+
     google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);
         var mapOptions = {
