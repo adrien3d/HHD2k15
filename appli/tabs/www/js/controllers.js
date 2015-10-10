@@ -132,7 +132,7 @@ angular.module('starter.controllers', [])
  
 })
 
-/*
+
 .controller('MapController', function($scope, $http, $ionicModal,$ionicLoading, FriendsNearby) {
     // FriendsNearby.all().then(function(data) {
     //         $scope.friends = data;
@@ -229,8 +229,7 @@ angular.module('starter.controllers', [])
         };
 
 
-})*/
-
+})
 
 
 .controller('GroupesCtrl', function($scope) {})
