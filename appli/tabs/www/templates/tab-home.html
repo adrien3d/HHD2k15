@@ -4,8 +4,8 @@
 
 <div class="list card" >
 <h1>En soirée</h1>
-      <ion-item ng-repeat="friend in friends | filter:{type:2}">
-        <div class="item-avatar item-icon-right" type="item-text-wrap" href="#/tab/map/{{friend.id}}" >
+      <ion-item ng-repeat="friend in friends | filter:{type:2}" href="#/tab/map/{{friend.id}}">
+        <div class="item-avatar item-icon-right" type="item-text-wrap">
           <img ng-src="{{friend.face}}">
           <h2 >{{friend.name}}</h2>
           <p >à <b>{{friend.distance/1000}} km</b></p>
@@ -17,8 +17,8 @@
 
 <div class="list card" >  
   <h1>À envie de sortir</h1>
-      <ion-item ng-repeat="friend in friends | filter:{type:1}">
-        <div class="item-avatar item-icon-right" type="item-text-wrap" href="#/tab/map/{{friend.id}}" >
+      <ion-item ng-repeat="friend in friends | filter:{type:1}" href="#/tab/map/{{friend.id}}">
+        <div class="item-avatar item-icon-right" type="item-text-wrap" >
           <img ng-src="{{friend.face}}">
           <h2 >{{friend.name}}</h2>
           <p >à <b>{{friend.distance/1000}} km</b></p>
@@ -30,8 +30,8 @@
 
 <div class="list card" >
   <h1>Indisponible</h1>
-      <ion-item ng-repeat="friend in friends | filter:{type:0}">
-        <div class="item-avatar item-icon-right" type="item-text-wrap" href="#/tab/map/{{friend.id}}" >
+      <ion-item ng-repeat="friend in friends | filter:{type:0}" href="#/tab/map/{{friend.id}}">
+        <div class="item-avatar item-icon-right" type="item-text-wrap">
           <img ng-src="{{friend.face}}">
           <h2 >{{friend.name}}</h2>
           <p >à <b>{{friend.distance/1000}} km</b></p>
