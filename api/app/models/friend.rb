@@ -4,7 +4,7 @@ class Friend < ActiveRecord::Base
   validates_presence_of :user_id, :friend_id
 
   def as_json(options = { })
-    User.find(friend_id).as_json(:except => [:authentication_token])
+    User.find(friend_id).as_json(:except => [:authentication_token], :include => :last_position)
   end
 end
 
