@@ -5,7 +5,7 @@
 <div class="list card" >
 <h1>En soirée</h1>
   <ion-list>
-      <ion-item ng-repeat="friend in friends | filter:{type:2}">
+      <ion-item ng-repeat="friend in friends | filter:{user_status:2}">
         <div class="item-avatar item-icon-right" type="item-text-wrap">
           <img ng-src="{{friend.face}}">
           <h2 >{{friend.name}}</h2>
@@ -21,7 +21,7 @@
 <div class="list card" >  
   <h1>A envie de sortir</h1>
   <ion-list>
-      <ion-item ng-repeat="friend in friends | filter:{type:1}">
+      <ion-item ng-repeat="friend in friends | filter:{user_status:1}">
         <div class="item-avatar item-icon-right" type="item-text-wrap" >
           <img ng-src="{{friend.face}}">
           <h2 >{{friend.name}}</h2>
@@ -35,7 +35,7 @@
 <div class="list card">
   <h1>Indisponible</h1>
   <ion-list>
-      <ion-item ng-repeat="friend in friends | filter:{type:0}">
+      <ion-item ng-repeat="friend in friends | filter:{user_status:0}">
         <div class="item-avatar item-icon-right" type="item-text-wrap">
           <img ng-src="{{friend.face}}">
           <h2 >{{friend.name}}</h2>
