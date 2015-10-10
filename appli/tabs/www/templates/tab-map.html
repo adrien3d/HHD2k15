@@ -71,7 +71,7 @@
                 <p style="margin-top: 12px; float:left">
                     {{ Invitation.sender.first_name }} {{ Invitation.sender.last_name }}
                 </p>
-                <button class="button button-small button-positive" style="float:right; margin-top:5px">Accepter</button>
+                <button class="button button-small button-positive" ng-click="AcceptInvit(Invitation.id, Invitation.sender.first_name, Invitation.sender.last_name)" style="float:right; margin-top:5px">Accepter</button>
                 <div style="clear:both;"></div>
             </div>
 
