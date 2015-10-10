@@ -209,42 +209,7 @@ angular.module('starter.controllers', [])
         $state.go('login');
     };
 
-  $scope.addContact = function() {
-    $cordovaContacts.save($scope.contactForm).then(function(result) {
-      // Contact saved
-    }, function(err) {
-      // Contact error
-    });
-  };
-
-  $scope.getAllContacts = function() {
-    $cordovaContacts.find().then(function(allContacts) { //omitting parameter to .find() causes all contacts to be returned
-      $scope.contacts = allContacts;
-    })
-  };
-
-  $scope.findContactsBySearchTerm = function (searchTerm) {
-    var opts = {                                           //search options
-      filter : searchTerm,                                 // 'Bob'
-      multiple: true,                                      // Yes, return any contact that matches criteria
-      fields:  [ 'displayName', 'name' ],                   // These are the fields to search for 'bob'.
-      desiredFields: [id]   //return fields.
-    };
-
-    if ($ionicPlatform.isAndroid()) {
-      opts.hasPhoneNumber = true;         //hasPhoneNumber only works for android.
-    };
-
-    $cordovaContacts.find(opts).then(function (contactsFound) {
-      $scope.contacts = contactsFound;
-    })
-  }
-
-  $scope.pickContactUsingNativeUI = function () {
-    $cordovaContacts.pickContact().then(function (contactPicked) {
-      $scope.contact = contactPicked;
-    })
-  }
+ 
 
 
 
@@ -257,30 +222,28 @@ angular.module('starter.controllers', [])
     //   })
 
 
-    // $http({
-    //             method: 'GET',
-    //             url: "http://46.101.218.111/api/v1/profile",
-    //             headers: {
-    //                 'Content-Type': 'application/x-www-form-urlencoded'
-    //             },
-    //             data: $.param({
-    //                 'user_email': JSON.parse(window.localStorage["user"]).email,
-    //                 'user_token': JSON.parse(window.localStorage["user"]).token
-    //             })
-    //         }).success(function(data, status) {
-    //             console.log(data);
-    //             if (status == 200) {
-    //                 alert("Tout va bien");
-                    
-    //             }else{
-    //                 alert("Problème");
-    //                 alert(data);
-    //             }
-    //         }).error(function(data, status) {
-    //             alert("Problème xhr");
-    //             alert(data);
-    //         });
-    $scope.user_name = "couco";   
+    $http({
+                method: 'GET',
+                url: "http://46.101.218.111/api/v1/profile/",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                params: {
+                    'user_email': JSON.parse(window.localStorage["user"]).email,
+                    'user_token': JSON.parse(window.localStorage["user"]).token
+                }
+            }).success(function(data, status) {
+                console.log(data);
+                if (status == 200) {
+                    $scope.user_name = data.first_name + " " + data.last_name; 
+
+                }else{
+
+                }
+            }).error(function(data, status) {
+
+            });
+      
 })
 
     .controller('EventDetailCtrl', function($scope, Events) {
