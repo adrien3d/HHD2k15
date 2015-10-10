@@ -18,22 +18,20 @@ angular.module('starter.controllers', [])
         $('.button-status').addClass('button-positive').removeClass('button-balanced');
         $('#status_' + status_id).addClass('button-balanced');
         console.log(status_id);
-        $http.put('http://46.101.218.111/api/v1/user/9',$.param({
+         $http({
+            method: 'PUT',
+            url: "http://46.101.218.111/api/v1/user/9",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: $.param({
                     'user[user_status]': status_id,
                     'user_email': JSON.parse(window.localStorage["user"]).email,
                     'user_token': JSON.parse(window.localStorage["user"]).token
-                }),{
-                headers:{
-                    'Content-Type':"application/json"
-                }
-            }).success(function(data, status, a) {
-                if (status == 200) {
-                    console.log(data);
-
-                }
-            });
-    };
-
+            })
+        });
+            
+      };
     $scope.lieux = "Inconnu";
 })
 
@@ -60,6 +58,8 @@ angular.module('starter.controllers', [])
     var data_headers = {
         "Content-Type": "application/x-www-form-urlencoded"
     };
+
+    //console.log(data_headers);
 
 
     $scope.email = $stateParams.email;
@@ -91,8 +91,11 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('MapController', function($scope, $http, $ionicLoading, FriendsNearby) {
-    $scope.friends = FriendsNearby.all();
+.controller('MapController', function($scope, $http, $ionicModal,$ionicLoading, FriendsNearby) {
+    FriendsNearby.all().then(function(data) {
+            $scope.friends = data;
+        }
+    );
 
     google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);
@@ -112,6 +115,78 @@ angular.module('starter.controllers', [])
         });
         $scope.map = map;
     });
+
+
+    //FENETRE MODAL INVITATION
+
+    $ionicModal.fromTemplateUrl('my-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+    $scope.openModal = function() {
+        FriendsNearby.getInvites().then(function(data) {
+                console.log(data);
+                $scope.Invitations = data;
+            }
+        );
+        $scope.modal.show();
+    };
+    $scope.closeModal = function() {
+        $scope.modal.hide();
+    };
+    //Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+        $scope.modal.remove();
+    });
+    // Execute action on hide modal
+    $scope.$on('modal.hidden', function() {
+        // Execute action
+    });
+    // Execute action on remove modal
+    $scope.$on('modal.removed', function() {
+        // Execute action
+    });
+
+        $scope.Invite = function(mail){
+            var data_headers = {
+                "Content-Type": "application/x-www-form-urlencoded"
+            };
+            $http({
+                method: 'POST',
+                url: "http://46.101.218.111/api/v1/user/search",
+                headers: data_headers,
+                data: $.param({
+                    email: mail,
+                    user_email: JSON.parse(window.localStorage["user"]).email,
+                    user_token: JSON.parse(window.localStorage["user"]).token
+                })
+            }).success(function(data, status, a) {
+                if (status == 200 || status == 201) {
+                    $http({
+                        method: 'POST',
+                        url: "http://46.101.218.111/api/v1/invites",
+                        headers: data_headers,
+                        data: $.param({
+                            friend_id: data.user.id,
+                            user_email: JSON.parse(window.localStorage["user"]).email,
+                            user_token: JSON.parse(window.localStorage["user"]).token
+                        })
+                    }).success(function(data, status, a) {
+                        if (status == 200 || status == 201) {
+                            alert("Invitation Envoyée!");
+                        }else{
+                            alert("Impossible d'ajouter cette personne !");
+                        }
+                    });
+                }else{
+                    alert("Impossible d'ajouter cette personne !");
+                }
+            });
+        };
+
+
 })
 
 

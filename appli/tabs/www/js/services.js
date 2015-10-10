@@ -76,9 +76,9 @@ app.service('FriendsNearby', function($http, $q) {
   var data_headers =
   {"Content-Type" : "application/x-www-form-urlencoded"};
 
-  console.log(data_headers);
+  //console.log(data_headers);
 
-  console.log(JSON.parse(window.localStorage['user']).token);
+  //console.log(JSON.parse(window.localStorage['user']).token);
 
   var service = {
     friends: [],
@@ -86,9 +86,9 @@ app.service('FriendsNearby', function($http, $q) {
 
       var def = $q.defer();
 
-      $http.get(encodeURI('http://46.101.218.111/api/v1/user?user_email=' + JSON.parse(window.localStorage["user"]).email + '&user_token=' + JSON.parse(window.localStorage["user"]).token))
+      $http.get(encodeURI('http://46.101.218.111/api/v1/friends?user_email=' + JSON.parse(window.localStorage["user"]).email + '&user_token=' + JSON.parse(window.localStorage["user"]).token))
           .success(function (users) {
-            console.log(users);
+            //console.log(users);
 
             users.forEach(function (user) {
               //console.log(user);
@@ -105,7 +105,7 @@ app.service('FriendsNearby', function($http, $q) {
             def.resolve(service.friends);
           })
           .error(function () {
-            def.reject('Impossible de recupérer les projets');
+            def.reject('Impossible de recupérer les utilisateurs');
           });
 
       return def.promise;
@@ -125,7 +125,28 @@ app.service('FriendsNearby', function($http, $q) {
         }
       }
       return null;
-    }
+    },
+      invitations : [],
+      getInvites: function(userId){
+          var def = $q.defer();
+
+          $http.get(encodeURI('http://46.101.218.111/api/v1/requests?user_email=' + JSON.parse(window.localStorage["user"]).email + '&user_token=' + JSON.parse(window.localStorage["user"]).token))
+              .success(function (invitations) {
+                  service.invitations = [];
+                  //console.log(invitations);
+
+                  invitations.forEach(function (invitation) {
+                      //console.log(user);
+                      service.invitations.push(invitation);
+                  });
+                  def.resolve(service.invitations);
+                  })
+              .error(function () {
+                  def.reject('Impossible de recupérer les invitations');
+              });
+
+          return def.promise;
+      }
   };
 
   return service;

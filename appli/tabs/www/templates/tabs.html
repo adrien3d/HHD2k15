@@ -3,37 +3,41 @@ Create tabs with an icon and label, using the tabs-positive style.
 Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
+<ion-nav-bar class="bar-assertive">
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+</ion-nav-bar>
 <ion-tabs class="tabs-icon-top tabs-color-active-assertive">
 
   <!-- Dashboard Tab -->
-  <ion-tab title="Accueil" icon="accueil" href="#/tab/home">
+  <ion-tab title="Accueil" icon="ion-beer" href="#/tab/home">
     <ion-nav-view name="tab-home"></ion-nav-view>
   </ion-tab>
 
   <!-- Friends Tab -->
-  <ion-tab title="Amis" icon="friends" href="#/tab/map">
+  <ion-tab title="Amis" icon-off="ion-ios-location-outline" icon-on="ion-ios-location" href="#/tab/map">
     <ion-nav-view name="tab-map"></ion-nav-view>
   </ion-tab>
 
   <!-- Planning Tab -->
-  <ion-tab title="Planning" icon="planning" href="#/tab/planning">
+  <ion-tab title="Planning" icon-off="ion-ios-calendar-outline" icon-on="ion-ios-calendar" href="#/tab/planning">
     <ion-nav-view name="tab-planning"></ion-nav-view>
   </ion-tab>
 
   <!-- Chat Tab -->
-  <ion-tab title="Chats" icon="mail" href="#/tab/chats">
+  <ion-tab title="Chats" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" href="#/tab/chats">
     <ion-nav-view name="tab-chats"></ion-nav-view>
   </ion-tab>
 
   <!-- Account Tab -->
-  <ion-tab title="Compte" icon="user" href="#/tab/account">
-    <ion-nav-view ng-src="img/settings.svg" name="tab-account"></ion-nav-view>
+  <ion-tab title="Compte" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/account">
+    <ion-nav-view name="tab-account"></ion-nav-view>
   </ion-tab>
 
 <!-- invitation Tab -->
-  <!--<ion-tab title="Invitation" icon="mail" href="#/tab/search">
+  <ion-tab title="Invitation" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/login">
     <ion-nav-view name="tab-search"></ion-nav-view>
-  </ion-tab>-->
+  </ion-tab>
 
 
 </ion-tabs>
