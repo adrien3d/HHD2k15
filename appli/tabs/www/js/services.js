@@ -91,8 +91,8 @@ app.factory('FriendsNearby', function() {
         method: 'POST',
         url: "http://46.101.218.111/api/v1/nearby",
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-            'X-User-Token': JSON.parse(window.localStorage['user']).token,
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-User-Token': JSON.parse(window.localStorage['user']).token
         }
     }).success(function(data, status, a) {
         if (status == 200)
