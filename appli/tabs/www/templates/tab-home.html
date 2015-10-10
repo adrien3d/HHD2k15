@@ -1,28 +1,46 @@
 
 <ion-view view-title="Party">
   <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">Recent Updates</div>
-      <div class="item item-body">
-        <div>
-          There is a fire in <b>sector 3</b>
+
+<div class="list card" >
+<h1>En soirée</h1>
+      <ion-item ng-repeat="friend in friends | filter:{type:2}">
+        <div class="item-avatar item-icon-right" type="item-text-wrap" href="#/tab/map/{{friend.id}}" >
+          <img ng-src="{{friend.face}}">
+          <h2 >{{friend.name}}</h2>
+          <p >à <b>{{friend.distance/1000}} km</b></p>
+          <i  class="icon ion-chevron-right icon-accessory"></i>
         </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Health</div>
-      <div class="item item-body">
-        <div>
-          You ate an apple today!
+      </ion-item>
+  </ion-list>
+</div>
+
+<div class="list card" >  
+  <h1>À envie de sortir</h1>
+      <ion-item ng-repeat="friend in friends | filter:{type:1}">
+        <div class="item-avatar item-icon-right" type="item-text-wrap" href="#/tab/map/{{friend.id}}" >
+          <img ng-src="{{friend.face}}">
+          <h2 >{{friend.name}}</h2>
+          <p >à <b>{{friend.distance/1000}} km</b></p>
+          <i  class="icon ion-chevron-right icon-accessory"></i>
         </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow.
+      </ion-item>
+  </ion-list>
+</div>
+
+<div class="list card" >
+  <h1>Indisponible</h1>
+      <ion-item ng-repeat="friend in friends | filter:{type:0}">
+        <div class="item-avatar item-icon-right" type="item-text-wrap" href="#/tab/map/{{friend.id}}" >
+          <img ng-src="{{friend.face}}">
+          <h2 >{{friend.name}}</h2>
+          <p >à <b>{{friend.distance/1000}} km</b></p>
+          <i  class="icon ion-chevron-right icon-accessory"></i>
         </div>
-      </div>
-    </div>
+      </ion-item>
+  </ion-list>
+</div>
+
+
   </ion-content>
+</ion-view>
