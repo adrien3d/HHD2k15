@@ -100,14 +100,18 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('PlanningCtrl', function($scope) {
+.controller('PlanningCtrl', function($scope, $state) {
+    $scope.search = function(email) {
+        $state.go('tab.search', {
+            email: email
+        });
+    }
 })
 
 .controller('MapController', function($scope, $ionicLoading) {
         
  //   google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);
- console.log("po");
         var mapOptions = {
             center: myLatlng,
             zoom: 16,
@@ -119,6 +123,7 @@ angular.module('starter.controllers', [])
         console.log(map);
  
         navigator.geolocation.getCurrentPosition(function(pos) {
+            console.log(pos.coords.latitude + ' ' +  pos.coords.longitude);
             map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
             var myLocation = new google.maps.Marker({
                 position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
@@ -127,18 +132,31 @@ angular.module('starter.controllers', [])
             });
         });
  
+
+
+    var zoneMarqueurs = new google.maps.LatLngBounds();
+        for( var i = 0, I = tableauMarqueurs.length; i < I; i++ ) {
+            ajouteMarqueur( tableauMarqueurs[i] );
+        }
+        map.fitBounds( zoneMarqueurs );
+            
+
+        function ajouteMarqueur( latlng ) {
+                var latitude = latlng.lat;
+                var longitude = latlng.lng;
+                var optionsMarqueur = {
+                    'map': map,
+                    position: new google.maps.LatLng( latitude, longitude )
+                };
+                var marqueur = new google.maps.Marker( optionsMarqueur );
+                zoneMarqueurs.extend( marqueur.getPosition() );
+            }
+            
+            
         $scope.map = map;
  //   });
- 
-})
 
 
-.controller('MapController', function($scope, $http, $ionicModal,$ionicLoading, FriendsNearby) {
-    // FriendsNearby.all().then(function(data) {
-    //         $scope.friends = data;
-    //     }
-    // );
-    console.log("hello");
     google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);
         var mapOptions = {
@@ -228,8 +246,22 @@ angular.module('starter.controllers', [])
             });
         };
 
-
+        $scope.AcceptInvit = function(id, nom, prenom ){
+            $http.get(encodeURI('http://46.101.218.111/api/v1/invites/'+id+'/accept?user_email=' + JSON.parse(window.localStorage["user"]).email + '&user_token=' + JSON.parse(window.localStorage["user"]).token))
+                .success(function (data, status) {
+                    if(status == "200" || status == "201") {
+                        alert("Vous êtes maintenant avec "+ prenom +" "+ nom +" !");
+                    }
+                })
+    }
 })
+
+
+/*.controller('AccountCtrl', function($scope) {
+  $scope.settings = {
+    //enableFriends: true
+  };
+})*/
 
 .controller('GroupesCtrl', function($scope) {})
 
@@ -326,11 +358,14 @@ angular.module('starter.controllers', [])
                 alert("Problème xhr");
                 alert(data);
             });
- 
+
+            
         }
 
     }   
 })
+
+
 
 
 .controller('AccountCtrl', function($scope, $http, $state) {
@@ -340,7 +375,7 @@ angular.module('starter.controllers', [])
     };
 
 
-console.log(JSON.parse(window.localStorage["user"]).email);
+
  
     $http({
                 method: 'GET',
@@ -353,8 +388,8 @@ console.log(JSON.parse(window.localStorage["user"]).email);
                     'user_token': JSON.parse(window.localStorage["user"]).token
                 }
             }).success(function(data, status) {
-                console.log(data);
-                console.log(status);
+
+
                 if (status == 200 ) {
                     $scope.user_name = data.first_name + " " + data.last_name; 
 
@@ -369,9 +404,142 @@ console.log(JSON.parse(window.localStorage["user"]).email);
 
 
     .controller('EventDetailCtrl', function($scope, Events) {
-        $scope.evenement = Events.get($stateParams.eventId);
+        $scope.evenemet = Events.get($stateParams.eventId);
     })
 
 .controller('AmiDetailCtrl', function($scope, $stateParams, Friends) {
     $scope.friend = Friends.get($stateParams.friendId);
 })
+
+.controller('CalendarCtrl', function($scope, $cordovaCalendar) {
+
+    /* $scope.createCalendar=$cordovaCalendar.createCalendar({
+    calendarName: 'Cordova Calendar',
+    calendarColor: '#FF0000'
+  }).then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });
+
+  $cordovaCalendar.deleteCalendar('Cordova Calendar').then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });
+
+  $scope.createEvent=$cordovaCalendar.createEvent({
+    title: 'Space Race',
+    location: 'The Moon',
+    notes: 'Bring sandwiches',
+    startDate: new Date(2015, 0, 6, 18, 30, 0, 0, 0),
+    endDate: new Date(2015, 1, 6, 12, 0, 0, 0, 0)
+  }).then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });
+
+/*  $cordovaCalendar.createEventWithOptions({
+    title: 'Space Race',
+    location: 'The Moon',
+    notes: 'Bring sandwiches',
+    startDate: new Date(2015, 0, 6, 18, 30, 0, 0, 0),
+    endDate: new Date(2015, 1, 6, 12, 0, 0, 0, 0)
+  }).then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });
+
+  $cordovaCalendar.createEventInteractively({
+    title: 'Space Race',
+    location: 'The Moon',
+    notes: 'Bring sandwiches',
+    startDate: new Date(2015, 0, 6, 18, 30, 0, 0, 0),
+    endDate: new Date(2015, 1, 6, 12, 0, 0, 0, 0)
+  }).then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });
+
+  $cordovaCalendar.createEventInNamedCalendar({
+    title: 'Space Race',
+    location: 'The Moon',
+    notes: 'Bring sandwiches',
+    startDate: new Date(2015, 0, 6, 18, 30, 0, 0, 0),
+    endDate: new Date(2015, 1, 6, 12, 0, 0, 0, 0),
+    calendarName: 'Cordova Calendar'
+  }).then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });
+
+  $cordovaCalendar.findEvent({
+    title: 'Space Race',
+    location: 'The Moon',
+    notes: 'Bring sandwiches',
+    startDate: new Date(2015, 0, 6, 18, 30, 0, 0, 0),
+    endDate: new Date(2015, 1, 6, 12, 0, 0, 0, 0)
+  }).then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });
+
+  $cordovaCalendar.listEventsInRange(
+    new Date(2015, 0, 6, 0, 0, 0, 0, 0),
+    new Date(2015, 1, 6, 0, 0, 0, 0, 0)
+  ).then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });
+
+  $cordovaCalendar.listCalendars().then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });
+
+  $cordovaCalendar.findAllEventsInNamedCalendar('Cordova Calendar').then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });
+
+  $cordovaCalendar.modifyEvent({
+    title: 'Space Race',
+    location: 'The Moon',
+    notes: 'Bring sandwiches',
+    startDate: new Date(2015, 0, 6, 18, 30, 0, 0, 0),
+    endDate: new Date(2015, 1, 6, 12, 0, 0, 0, 0),
+    newTitle: 'Ostrich Race',
+    newLocation: 'Africa',
+    newNotes: 'Bring a saddle',
+    newStartDate: new Date(2015, 2, 12, 19, 0, 0, 0, 0),
+    newEndDate: new Date(2015, 2, 12, 22, 30, 0, 0, 0)
+  }).then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });
+
+  $cordovaCalendar.deleteEvent({
+    newTitle: 'Ostrich Race',
+    location: 'Africa',
+    notes: 'Bring a saddle',
+    startDate: new Date(2015, 2, 12, 19, 0, 0, 0, 0),
+    endDate: new Date(2015, 2, 12, 22, 30, 0, 0, 0)
+  }).then(function (result) {
+    // success
+  }, function (err) {
+    // error
+  });*/
+
+});
+
+
+
