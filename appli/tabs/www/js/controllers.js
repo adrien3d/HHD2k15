@@ -1,7 +1,8 @@
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function($scope, FriendsNearby) {
+.controller('HomeCtrl', function($state, $scope, FriendsNearby) {
     $scope.friends = FriendsNearby.all();
+    $scope.lieux = "Inconnu";
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -58,7 +59,6 @@ angular.module('starter.controllers', [])
 })
 
 
-
 .controller('MapController', function($scope, $ionicLoading, FriendsNearby) {
     $scope.friends = FriendsNearby.all();
     google.maps.event.addDomListener(window, 'load', function() {
@@ -80,6 +80,7 @@ angular.module('starter.controllers', [])
         $scope.map = map;
     });
 })
+
 
 /*.controller('AccountCtrl', function($scope) {
   $scope.settings = {
@@ -208,7 +209,6 @@ $scope.loginFacebook = function(){
         }
     });
 })
-
 .controller('EventDetailCtrl', function($scope, Events) {  
     $scope.evenemet = Events.get($stateParams.eventId);
 })
@@ -219,7 +219,7 @@ $scope.loginFacebook = function(){
 
 .controller('CalendarCtrl', function ($scope, $cordovaCalendar) {
 
-  $cordovaCalendar.createCalendar({
+ /* $scope.createCalendar=$cordovaCalendar.createCalendar({
     calendarName: 'Cordova Calendar',
     calendarColor: '#FF0000'
   }).then(function (result) {
@@ -234,7 +234,7 @@ $scope.loginFacebook = function(){
     // error
   });
 
-  $cordovaCalendar.createEvent({
+  $scope.createEvent=$cordovaCalendar.createEvent({
     title: 'Space Race',
     location: 'The Moon',
     notes: 'Bring sandwiches',
@@ -246,7 +246,7 @@ $scope.loginFacebook = function(){
     // error
   });
 
-  $cordovaCalendar.createEventWithOptions({
+/*  $cordovaCalendar.createEventWithOptions({
     title: 'Space Race',
     location: 'The Moon',
     notes: 'Bring sandwiches',
@@ -343,7 +343,7 @@ $scope.loginFacebook = function(){
     // success
   }, function (err) {
     // error
-  });
+  });*/
 
 });
 
@@ -363,4 +363,3 @@ $scope.loginFacebook = function(){
         });
     }
 })*/
-

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/auth' => 'user#get_token'
       post '/user/search' => 'user#search'
-      resources :user, except: [:index, :delete, :new, :edit]
+      resources :user, except: [:delete, :new, :edit]
       resources :user_position, except: [:index, :delete, :new, :edit]
       resources :invites, except: [:delete, :new, :edit, :update]
       get '/invites/requests' => 'invites#requests'
