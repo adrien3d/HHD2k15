@@ -24,7 +24,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       StatusBar.styleLightContent();
     }
 
-    Parse.initialize("KVZL1Yr0Z4EKOJUuCbsJksklgsnc9HsXbEo3lNHI", "vfRrWFtgLAQcpweNODw811TS7NNDGQKxWnp6tQRL");
+    Parse.initialize("OyrdgIFVES0sarbrtni7htyIeqnVrplO8VG0e7TD", "2ak6tbmwsrsOwbq7e3BvV63Jb9g1HY946yBoWqQg");
+
+ 
+if(!(ionic.Platform.isIOS() || ionic.Platform.isAndroid())){
+  window.fbAsyncInit = function() {
+      Parse.FacebookUtils.init({
+          appId      : '930561750336396', 
+          version    : 'v2.5',
+          xfbml      : true
+      });
+  };
+ 
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+}
 
 
 

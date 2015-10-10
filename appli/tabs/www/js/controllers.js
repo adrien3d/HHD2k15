@@ -110,23 +110,10 @@ angular.module('starter.controllers', [])
 
  
 $scope.loginFacebook = function(){
+  //Browser Login
+  if(!(ionic.Platform.isIOS() || ionic.Platform.isAndroid())){
  
-  $cordovaFacebook.login(["public_profile", "email"]).then(function(success){
- 
-    console.log(success);
- 
-    //Need to convert expiresIn format from FB to date
-    var expiration_date = new Date();
-    expiration_date.setSeconds(expiration_date.getSeconds() + success.authResponse.expiresIn);
-    expiration_date = expiration_date.toISOString();
- 
-    var facebookAuthData = {
-      "id": success.authResponse.userID,
-      "access_token": success.authResponse.accessToken,
-      "expiration_date": expiration_date
-    };
- 
-    Parse.FacebookUtils.logIn(facebookAuthData, {
+    Parse.FacebookUtils.logIn(null, {
       success: function(user) {
         console.log(user);
         if (!user.existed()) {
@@ -137,12 +124,49 @@ $scope.loginFacebook = function(){
       },
       error: function(user, error) {
         alert("User cancelled the Facebook login or did not fully authorize.");
+        console.log(user);
+        console.log(error);
       }
     });
  
-  }, function(error){
-    console.log(error);
-  });
+  } 
+  //Native Login
+  else {
+ 
+    $cordovaFacebook.login(["public_profile", "email"]).then(function(success){
+ 
+      console.log(success);
+ 
+      //Need to convert expiresIn format from FB to date
+      var expiration_date = new Date();
+      expiration_date.setSeconds(expiration_date.getSeconds() + success.authResponse.expiresIn);
+      expiration_date = expiration_date.toISOString();
+ 
+      var facebookAuthData = {
+        "id": success.authResponse.userID,
+        "access_token": success.authResponse.accessToken,
+        "expiration_date": expiration_date
+      };
+ 
+      Parse.FacebookUtils.logIn(facebookAuthData, {
+        success: function(user) {
+          console.log(user);
+          if (!user.existed()) {
+            alert("User signed up and logged in through Facebook!");
+          } else {
+            alert("User logged in through Facebook!");
+          }
+        },
+        error: function(user, error) {
+          alert("User cancelled the Facebook login or did not fully authorize.");
+        }
+      });
+ 
+    }, function(error){
+      console.log(error);
+    });
+ 
+  }
  
 };
 
