@@ -43,28 +43,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       alert('CONNECTION FAIL BITCH');
     }
 
-    setInterval(ScanForFriends, 10000);
+  //   setInterval(ScanForFriends, 10000);
 
-    function ScanForFriends(){
-      ble.startScan([], function(device) {
-        //alert(device.name+' | '+device.rssi);
-        //if(device.id == "86D46DF4-BF47-15B4-DFDB-AFB2EC7AD143"){
-        //    alert(device.rssi);
-        //}
-        $scope.lieux="Inconnu";
+  //   function ScanForFriends(){
+  //     ble.startScan([], function(device) {
+  //       //alert(device.name+' | '+device.rssi);
+  //       //if(device.id == "86D46DF4-BF47-15B4-DFDB-AFB2EC7AD143"){
+  //       //    alert(device.rssi);
+  //       //}
+  //       $scope.lieux="Inconnu";
 
-        if(device.id == "86D46DF4-BF47-15B4-DFDB-AFB2EC7AD143" && device.rssi <90){
-          $scope.lieux = "Plaine Image";
+  //       if(device.id == "86D46DF4-BF47-15B4-DFDB-AFB2EC7AD143" && device.rssi <90){
+  //         $scope.lieux = "Plaine Image";
 
 
-          //$state.go($state.current, {}, {reload: true});
-        }
+  //         //$state.go($state.current, {}, {reload: true});
+  //       }
 
-        //$http.post("", {"lieux" : lieux});
-      }, failure);
-    }
+  //       //$http.post("", {"lieux" : lieux});
+  //     }, failure);
+  //   }
 
-  });
+   });
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
