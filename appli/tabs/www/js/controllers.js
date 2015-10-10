@@ -231,7 +231,6 @@ angular.module('starter.controllers', [])
 
 })
 
-
 .controller('GroupesCtrl', function($scope) {})
 
 .controller('HistoriqueCtrl', function($scope) {})

@@ -81,8 +81,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
-  
     .state('login', {
     url: '/',
     templateUrl: 'templates/login.html',
@@ -106,8 +104,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     abstract: true,
     templateUrl: 'templates/tabs.html'
   })
-
-
+    .state('param', {
+    url: '/param',
+    abstract: true,
+    templateUrl: 'templates/params.html'
+  })
 
 
   // Each tab has its own nav history stack:
@@ -182,7 +183,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.groupes', {
+  .state('param.groupes', {
     url: '/groupes',
     views: {
       'tab-groupes': {
@@ -192,7 +193,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-    .state('tab.historique', {
+    .state('param.historique', {
     url: '/historique',
     views: {
       'tab-historique': {
@@ -202,7 +203,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   }) 
 
-.state('tab.gestioncompte', {
+.state('param.gestioncompte', {
     url: '/gestioncompte',
     views: {
       'tab-gestioncompte': {
@@ -212,7 +213,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-.state('tab.parametres', {
+.state('param.parametres', {
     url: '/parametres',
     views: {
       'tab-parametres': {
@@ -222,7 +223,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   }) 
 
- .state('tab.apropos', {
+ .state('param.apropos', {
     url: '/apropos',
     views: {
       'tab-apropos': {
