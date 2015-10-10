@@ -27,11 +27,11 @@ id (dans le GET)
 # PATCH	/api/v1/user/:id
 Permet d'éditer un utilisateur
 #### Parameters
-id (dans le get)
-email (optionnel)
-password (idem)
-name (idem)
-surname (idem)
+user[id] (dans le get)
+user[email] (optionnel)
+user[password] (idem)
+user[name] (idem)
+user[surname] (idem)
 ...
 
 ---
