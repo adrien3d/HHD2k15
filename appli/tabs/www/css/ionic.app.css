@@ -7795,3 +7795,21 @@ h2.ng-binding {
 [name="tab-chats"] .item-avatar .item-content > img:first-child{
   left:12px;
 }
+
+.icon.barre-basse {
+    display: none;
+}
+.tab-item.icon.barre-basse {
+    display: block;
+    font-size: 30px;
+}
+
+.tab-item.icon.barre-basse .icon.barre-basse {
+    display: block;
+}
+span.tab-title.ng-binding {
+    display: block;
+    font-size:14px;
+}
+
+
