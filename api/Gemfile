@@ -57,7 +57,6 @@ group :development, :test do
   #RSpec for unit testing
   gem 'rspec-rails', '~> 3.0'
 end
-gem 'tzinfo-data'
 
 #Devise & encryption
 gem 'devise'

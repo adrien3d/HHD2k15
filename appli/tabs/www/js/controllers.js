@@ -2,8 +2,6 @@ angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($state, $scope, FriendsNearby) {
 
-        console.log(JSON.parse(window.localStorage['user']).token); 
-
     navigator.geolocation.getCurrentPosition(function(position) {
         $scope.lat = position.coords.latitude;
         $scope.lng = position.coords.longitude;
@@ -99,7 +97,11 @@ angular.module('starter.controllers', [])
 })
 
 
-
+/*.controller('AccountCtrl', function($scope) {
+  $scope.settings = {
+    //enableFriends: true
+  };
+})*/
 
 .controller('GroupesCtrl', function($scope) {})
 
@@ -122,7 +124,7 @@ angular.module('starter.controllers', [])
 
 //connexion
 .controller('SigninCtrl', function($scope, $http, $state) {
-     $scope.loginEmail = function(email, password) {
+     $scope.signupEmail = function(email, password) {
       $http({
             method: 'POST',
             url: "http://46.101.218.111/api/v1/auth",
@@ -202,11 +204,12 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('AccountCtrl', function($scope, $http, $state, $cordovaContacts, $ionicPlatform) {
+.controller('AccountCtrl', function($scope, $http, $state) {
      $scope.logout = function() {
     
         window.localStorage['user'] = 'null';
         $state.go('login');
+<<<<<<< HEAD
     };
 
  
@@ -234,9 +237,14 @@ angular.module('starter.controllers', [])
       
 })
 
+=======
+    }
+   
+    })
+>>>>>>> 0a0fb22de95b46a3c98057eda57f3200ff7179eb
     .controller('EventDetailCtrl', function($scope, Events) {
         $scope.evenemet = Events.get($stateParams.eventId);
-})
+    })
 
 .controller('AmiDetailCtrl', function($scope, $stateParams, Friends) {
     $scope.friend = Friends.get($stateParams.friendId);

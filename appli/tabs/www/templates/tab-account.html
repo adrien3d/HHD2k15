@@ -14,8 +14,7 @@
     	<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
 	        <img ng-src="{{user.face}}"> <!-- A changer -->
 	        <h1>Mon Compte</h1>
-	        <h2>NOM : {{user_name}}</h2>	     
-
+	        <h2>NOM : {{users.user_status}}</h2>	     
 	        <p> Statut : 
 	        <div class="list">
 			  <label class="item item-radio">
@@ -78,12 +77,6 @@
 	     <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
 	       <button ng-click="logout()" class="button button-assertive">
 			  Déconnexion
-			</button>
-	    </ion-item>
-		<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
-	       <button ng-click="findContactsBySearchTerm(maman)" class="button button-royal">
-			  Récupérer contacts
-			  {{contacts}}
 			</button>
 	    </ion-item>
     </ion-list>
