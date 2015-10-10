@@ -225,7 +225,8 @@ angular.module('starter.controllers', [])
                 }
             }).success(function(data, status) {
                 console.log(data);
-                if (status == 200) {
+                console.log(status);
+                if (status == 200 ) {
                     $scope.user_name = data.first_name + " " + data.last_name; 
 
                 }else{
