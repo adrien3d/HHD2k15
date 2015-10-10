@@ -142,7 +142,8 @@ angular.module('starter.controllers', [])
 
 //connexion
 .controller('SigninCtrl', function($scope, $http, $state) {
-     $scope.signupEmail = function(email, password) {
+    console.log("po");
+     $scope.loginEmail = function(email, password) {
       $http({
             method: 'POST',
             url: "http://46.101.218.111/api/v1/auth",
