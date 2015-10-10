@@ -6,31 +6,12 @@
                 Status
             </div>
             <div class="item item-text-wrap">
-                <div class="list">
-                    <label class="item item-radio">
-                        <input type="radio" name="group">
-                        <div class="item-content">
-                            Indisponible
-                        </div>
-                        <i class="radio-icon ion-checkmark"></i>
-                    </label>
-                    <label class="item item-radio">
-                        <input type="radio" name="group">
-                        <div class="item-content">
-                            Envie de sortir
-                        </div>
-                        <i class="radio-icon ion-checkmark"></i>
-                    </label>
-                    <label class="item item-radio">
-                        <input type="radio" name="group">
-                        <div class="item-content">
-                            En soirée
-                        </div>
-                        <i class="radio-icon ion-checkmark"></i>
-                    </label>
-
-
-                </div>
+            <div class="button-bar">
+              <a ng-click="statusUpdate(1)" id='status_1' class="button-status button button-positive">Indisponible</a>
+              <a ng-click="statusUpdate(2)" id='status_2' class="button-status button button-positive">Envie de sortir</a>
+              <a ng-click="statusUpdate(3)" id='status_3' class="button-status button button-positive">En soirée</a>
+            </div>
+              
             </div>
 
 

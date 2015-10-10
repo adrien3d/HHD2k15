@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function($state, $scope, FriendsNearby) {
+.controller('HomeCtrl', function($state, $scope, FriendsNearby, $http) {
 
     navigator.geolocation.getCurrentPosition(function(position) {
         $scope.lat = position.coords.latitude;
@@ -13,6 +13,26 @@ angular.module('starter.controllers', [])
             $scope.friends = data;
         }
     );
+
+    $scope.statusUpdate = function(status_id){
+        $('.button-status').addClass('button-positive').removeClass('button-balanced');
+        $('#status_' + status_id).addClass('button-balanced');
+        console.log(status_id);
+        $http.put('http://46.101.218.111/api/v1/user/9',$.param({
+                    'user[user_status]': status_id,
+                    'user_email': JSON.parse(window.localStorage["user"]).email,
+                    'user_token': JSON.parse(window.localStorage["user"]).token
+                }),{
+                headers:{
+                    'Content-Type':"application/json"
+                }
+            }).success(function(data, status, a) {
+                if (status == 200) {
+                    console.log(data);
+
+                }
+            });
+    };
 
     $scope.lieux = "Inconnu";
 })
@@ -40,8 +60,6 @@ angular.module('starter.controllers', [])
     var data_headers = {
         "Content-Type": "application/x-www-form-urlencoded"
     };
-
-    console.log(data_headers);
 
 
     $scope.email = $stateParams.email;
