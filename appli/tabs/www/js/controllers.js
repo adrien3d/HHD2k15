@@ -115,6 +115,8 @@ angular.module('starter.controllers', [])
 
 .controller('SigninCtrl', function($scope, $http, $state) {
 })
+
+
 .controller('SignupCtrl', function($scope, $http, $state) {
  $scope.signupEmail = function(email, password, firstname, lastname) {
         
@@ -131,9 +133,10 @@ angular.module('starter.controllers', [])
                     'user[last_name]': lastname,
                     'user[first_name]': firstname
                 })
-            }).success(function(data, status, a) {
-                if (status == 200) {
-                    console.log(data);
+            }).success(function(data, status) {
+                console.log(status);
+                if (status == 201) {
+                    alert("Tout va bien");
                     var token = data.token;
                     var email = data.email;
                     var user = {
@@ -141,9 +144,15 @@ angular.module('starter.controllers', [])
                         token: token
                     };
                     window.localStorage['user'] = JSON.stringify(user);
-                    $("#token").text(token);
+                    $state.go('tab.home');
+                }else{
+                    alert("Problème");
                 }
+            }).error(function(data, status) {
+                alert("Problème");
             });
+
+            
         }
 
     }   
