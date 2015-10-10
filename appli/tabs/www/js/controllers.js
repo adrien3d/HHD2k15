@@ -1,5 +1,7 @@
 angular.module('starter.controllers', [])
 
+
+
 .controller('HomeCtrl', function($state, $scope, FriendsNearby, $http) {
 
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -110,9 +112,13 @@ angular.module('starter.controllers', [])
 
 .controller('MapController', function($scope, $ionicLoading) {
         
+
+    var tableauMarqueurs = [
+    { lat:50.7011216, lng:3.15806 },
+       { lat:50.701229, lng:3.15836 },
+];
  //   google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);
- console.log("po");
         var mapOptions = {
             center: myLatlng,
             zoom: 16,
@@ -124,6 +130,7 @@ angular.module('starter.controllers', [])
         console.log(map);
  
         navigator.geolocation.getCurrentPosition(function(pos) {
+            console.log(pos.coords.latitude + ' ' +  pos.coords.longitude);
             map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
             var myLocation = new google.maps.Marker({
                 position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
@@ -132,6 +139,27 @@ angular.module('starter.controllers', [])
             });
         });
  
+
+
+    var zoneMarqueurs = new google.maps.LatLngBounds();
+        for( var i = 0, I = tableauMarqueurs.length; i < I; i++ ) {
+            ajouteMarqueur( tableauMarqueurs[i] );
+        }
+        map.fitBounds( zoneMarqueurs );
+            
+
+        function ajouteMarqueur( latlng ) {
+                var latitude = latlng.lat;
+                var longitude = latlng.lng;
+                var optionsMarqueur = {
+                    'map': map,
+                    position: new google.maps.LatLng( latitude, longitude )
+                };
+                var marqueur = new google.maps.Marker( optionsMarqueur );
+                zoneMarqueurs.extend( marqueur.getPosition() );
+            }
+            
+            
         $scope.map = map;
  //   });
  
