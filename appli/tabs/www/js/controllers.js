@@ -105,8 +105,13 @@ angular.module('starter.controllers', [])
 .controller('PlanningCtrl', function($scope) {
 })
 
-.controller('MapController', function($scope, $ionicLoading) {
-        
+
+.controller('MapController', function($scope, $http, $ionicModal,$ionicLoading, FriendsNearby) {
+    // FriendsNearby.all().then(function(data) {
+    //         $scope.friends = data;
+    //     }
+    // );
+            
 
     var tableauMarqueurs = [
     { lat:50.7011216, lng:3.15806 },
@@ -157,34 +162,6 @@ angular.module('starter.controllers', [])
             
         $scope.map = map;
  //   });
- 
-})
-
-
-.controller('MapController', function($scope, $http, $ionicModal,$ionicLoading, FriendsNearby) {
-    // FriendsNearby.all().then(function(data) {
-    //         $scope.friends = data;
-    //     }
-    // );
-    console.log("hello");
-    google.maps.event.addDomListener(window, 'load', function() {
-        var myLatlng = new google.maps.LatLng(0, 0);
-        var mapOptions = {
-            center: myLatlng,
-            zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-        navigator.geolocation.getCurrentPosition(function(pos) {
-            map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-            var myLocation = new google.maps.Marker({
-                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-                map: map,
-                title: "My Location"
-            });
-        });
-        $scope.map = map;
-    });
 
 
     //FENETRE MODAL INVITATION
