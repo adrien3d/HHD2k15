@@ -67,6 +67,6 @@ class Api::V1::UserController < Api::V1::ApiController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :access_token, :facebook_id, :description, :last_name, :email, :address, :birthdate, :sex, :telephone_number, :password)
+    params.require(:user).permit(:first_name, :access_token, :facebook_id, :description, :last_name, :email, :address, :birthdate, :sex, :telephone_number, :password, :user_status, :face)
   end
 end
