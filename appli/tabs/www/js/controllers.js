@@ -105,9 +105,17 @@ angular.module('starter.controllers', [])
 
 .controller('AproposCtrl', function($scope) {})
 
+.controller('LoginCtrl', function($scope, $ionicPopup, $state) {
+    if (window.localStorage['user'] != null)
+    {
+        //user connecté
+        $state.go('tab.home');
+    }
+})
+
 .controller('SignupCtrl', function($scope, $http, $state) {
  $scope.signupEmail = function(email, password, firstname, lastname) {
-       
+        
         if (email != "" && password != "") {
             $http({
                 method: 'POST',
@@ -305,18 +313,4 @@ angular.module('starter.controllers', [])
 });
 
 
-/*
-.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
-    $scope.data = {};
- 
-    $scope.login = function() {
-        LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data) {
-            $state.go('tab.dash');
-        }).error(function(data) {
-            var alertPopup = $ionicPopup.alert({
-                title: 'Login failed!',
-                template: 'Please check your credentials!'
-            });
-        });
-    }
-})*/
+

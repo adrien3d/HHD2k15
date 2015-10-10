@@ -115,7 +115,7 @@ if(!(ionic.Platform.isIOS() || ionic.Platform.isAndroid())){
     .state('signin', {
     url: '/signin',
     templateUrl: 'templates/signin.html',
-    controller: 'LoginCtrl'
+    controller: 'SigninCtrl'
   })
 
   // setup an abstract state for the tabs directive
@@ -272,12 +272,6 @@ if(!(ionic.Platform.isIOS() || ionic.Platform.isAndroid())){
 
 
 
-
-/*  .state('login', {
-      url: '/login',
-      templateUrl: 'templates/login.html',
-      controller: 'LoginCtrl'
-  })*/
 
   // if none of the above states are matched, use this as the fallback
 
