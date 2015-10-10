@@ -68,7 +68,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('AproposCtrl', function($scope) {
-});
+})
 
 
 .controller('AccountCtrl', function($scope, $http) {
