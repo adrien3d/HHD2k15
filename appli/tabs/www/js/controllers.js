@@ -209,7 +209,7 @@ angular.module('starter.controllers', [])
     
         window.localStorage['user'] = 'null';
         $state.go('login');
-<<<<<<< HEAD
+
     };
 
  
@@ -237,11 +237,7 @@ angular.module('starter.controllers', [])
       
 })
 
-=======
-    }
-   
-    })
->>>>>>> 0a0fb22de95b46a3c98057eda57f3200ff7179eb
+
     .controller('EventDetailCtrl', function($scope, Events) {
         $scope.evenemet = Events.get($stateParams.eventId);
     })
