@@ -49,9 +49,9 @@ class Api::V1::UserController < Api::V1::ApiController
     end
   end
 
-  def show
+  def profile
     begin
-      user = User.find(params[:id])
+      user = current_user
       render status: 200, json: user
     rescue ActiveRecord::RecordNotFound
       render status: 404, json: {error: "User doesn't exist"}
