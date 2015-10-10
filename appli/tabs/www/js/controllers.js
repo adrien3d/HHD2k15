@@ -371,7 +371,7 @@ console.log(JSON.parse(window.localStorage["user"]).email);
 
 
     .controller('EventDetailCtrl', function($scope, Events) {
-        $scope.evenemet = Events.get($stateParams.eventId);
+        $scope.evenement = Events.get($stateParams.eventId);
     })
 
 .controller('AmiDetailCtrl', function($scope, $stateParams, Friends) {
