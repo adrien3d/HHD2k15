@@ -11,10 +11,10 @@ password
 ---
 Utilisé pour créer un utilisateur
 
-user[email]
-user[password]
-user[last_name]
-user[first_name]
+user[email]  
+user[password]  
+user[last_name]  
+user[first_name]  
 
 ## GET	/api/v1/user/:id
 Affiche les infos de l'user
@@ -27,12 +27,10 @@ id (dans le GET)
 # PATCH	/api/v1/user/:id
 Permet d'éditer un utilisateur
 #### Parameters
-user[id] (dans le get)
-user[email] (optionnel)
-user[password] (idem)
-user[name] (idem)
-user[surname] (idem)
-...
+user\[email\]  
+user\[password\]  
+user\[name\]  
+user\[surname\]   
 
 ---
 
