@@ -210,18 +210,6 @@ angular.module('starter.controllers', [])
     };
 
  
-
-
-
-    // $http.get('http://46.101.218.111/api/v1/profile/?').then(function(resp) {
-    //     console.log('Success', resp);
-    //     // For JSON responses, resp.data contains the result
-    //   }, function(err) {
-    //     console.error('ERR', err);
-    //     // err.status will contain the status code
-    //   })
-
-
     $http({
                 method: 'GET',
                 url: "http://46.101.218.111/api/v1/profile/",

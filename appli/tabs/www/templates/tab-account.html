@@ -17,11 +17,31 @@
 	        <h2>NOM : {{user_name}}</h2>	     
 
 	        <p> Statut : 
-	        	<select id="statut">
-	        		<option value = "type:0">Indisponible</option>
-	        		<option value = "type:1">Envie de sortir</option>
-					<option value = "type:2">En soirée</option>
-	        	</select>
+	        <div class="list">
+			  <label class="item item-radio">
+			    <input type="radio" name="group">
+			    <div class="item-content">
+			      Indisponible
+			    </div>
+			    <i class="radio-icon ion-checkmark"></i>
+			  </label>
+			  <label class="item item-radio">
+			    <input type="radio" name="group">
+			    <div class="item-content">
+			      Envie de sortir
+			    </div>
+			    <i class="radio-icon ion-checkmark"></i>
+			  </label>
+			  <label class="item item-radio">
+			    <input type="radio" name="group">
+			    <div class="item-content">
+			      En soirée
+			    </div>
+			    <i class="radio-icon ion-checkmark"></i>
+			  </label>
+
+
+			</div>
 	        </p>
 	        <i class="icon ion-chevron-right icon-accessory"></i>
 	    </ion-item>
