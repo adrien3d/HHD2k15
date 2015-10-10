@@ -1,6 +1,13 @@
 <ion-view view-title="Compte">
   <ion-content>
     <ion-list>
+    	<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+	        <img ng-src="{{user.face}}"> <!-- A changer -->
+	        <h1>Mon Compte</h1>
+	        <h2>NOM : {{user.name}}</h2>
+	        <p> Statut : {{user.type}} </p>
+	        <i class="icon ion-chevron-right icon-accessory"></i>
+	    </ion-item>
 	    <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/tab/groupes">
 	        <img ng-src="{{chat.face}}"> <!-- A changer -->
 	        <h2>Groupes</h2>
