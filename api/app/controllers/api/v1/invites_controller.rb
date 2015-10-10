@@ -21,13 +21,11 @@ class Api::V1::InvitesController < Api::V1::ApiController
     begin
       friend = User.find(params[:friend_id])
       if friend.id != current_user.id
-        invite = Invite.create!(friend_id: friend.id, user: current_user)
+        invite = Invite.create(friend_id: friend.id, user: current_user)
         render status: 201, json: invite
       else
         render status: 500, json: {error: "You can't add yourself!"}
       end
-    rescue ActiveRecord::RecordInvalid
-      render status: 409, json: {error: "You already invited this user"}
     rescue ActiveRecord::RecordNotFound
       render status: 404, json: {error: "Friend doesn't exist"}
     end
