@@ -292,7 +292,7 @@ angular.module('starter.controllers', [])
                     alert("Tout va bien");
                     var token = data.token;
                     var email = data.email;
-                    var user_id = id;
+                    var user_id = data.id;
                     var user = {
                         email: email,
                         token: token,
