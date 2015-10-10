@@ -23,8 +23,37 @@ angular.module('starter.controllers', [])
     $scope.chat = Chats.get($stateParams.chatId);
 })
 
+.controller('PlanningSearchCtrl', function($scope, $stateParams, $http){
+  $scope.email = $stateParams.email;
+  console.log(JSON.parse(window.localStorage['user']).token);
+     $http({
+        method: 'POST',
+        url: "http://46.101.218.111/api/v1/user/search",
+        headers: {
+            ['Content-Type': 'application/x-www-form-urlencoded'],
+            ['X-User-Token':  JSON.parse(window.localStorage['user']).token],
+            ['X-User-Email': JSON.parse(window.localStorage['user']).email]
+        },
+        data: $.param({
+            email:  $stateParams.email
+        })
+    }).success(function(data, status, a) {
+        if (status == 200)
+        {
+            console.log(data);
 
-.controller('PlanningCtrl', function($scope) {})
+        }
+    });
+})
+
+
+.controller('PlanningCtrl', function($scope, $state) {
+  $scope.search = function(email){
+    $state.go('tab.search', {email: email});
+  }
+})
+
+
 
 .controller('MapController', function($scope, $ionicLoading) {
     google.maps.event.addDomListener(window, 'load', function() {
@@ -67,6 +96,7 @@ angular.module('starter.controllers', [])
 
 .controller('AproposCtrl', function($scope) {
 })
+
 
 
 .controller('AccountCtrl', function($scope, $http) {

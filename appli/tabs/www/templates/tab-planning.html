@@ -4,7 +4,10 @@
       <div class="item item-divider">Recent Updates</div>
       <div class="item item-body">
         <div>
-          There is a fire in <b>sector 3</b>
+        <form ng-submit='search(email)'>
+          <input type="text" placeholder="Username" ng-model="email">
+           <button class="button button-block button-calm">Chercher</button>
+           </form>
         </div>
       </div>
     </div>

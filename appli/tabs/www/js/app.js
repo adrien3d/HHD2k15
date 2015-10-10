@@ -41,6 +41,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     templateUrl: 'templates/tabs.html'
   })
 
+
+
+
   // Each tab has its own nav history stack:
 
   .state('tab.home', {
@@ -89,6 +92,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       'tab-planning': {
         templateUrl: 'templates/tab-planning.html',
         controller: 'PlanningCtrl'
+      }
+    }
+  })
+
+   .state('tab.search', {
+    url: '/planning/:email',
+    views: {
+      'tab-planning': {
+        templateUrl: 'templates/tab-planning-search.html',
+        controller: 'PlanningSearchCtrl'
       }
     }
   })
@@ -151,11 +164,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: 'AproposCtrl'
       }
     }
-  });
-/*
-  .state('login', {
+  })
+
+/*  .state('login', {
       url: '/login',
-      templateUrl: 'templates/login.html'
+      templateUrl: 'templates/login.html',
       controller: 'LoginCtrl'
   })*/
 
