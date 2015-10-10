@@ -157,7 +157,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'tab-planning': {
         templateUrl: 'templates/tab-planning.html',
-        controller: 'CalendarCtrl'
+        controller: 'PlanningCtrl'
       }
     }
   })
@@ -250,7 +250,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: 'AmiDetailCtrl'
       }
     }
-  })
+  });
 
 
 
@@ -269,7 +269,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     console.log(device.name);
     console.log(device.address);
   });*/
-})
+});
 
 
 document.addEventListener('deviceready', function () {
