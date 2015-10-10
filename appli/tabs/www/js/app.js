@@ -5,10 +5,12 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+
+
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
+.run(function($ionicPlatform, $http) {
+  $ionicPlatform.ready(function($scope) {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -21,7 +23,41 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       StatusBar.styleLightContent();
     }
 
+    //Bluetooth
+    ble.isEnabled(
+        function() {
+          alert("Bluetooth is enabled");
+        },
+        function() {
+          console.log("Bluetooth is *not* enabled");
+          alert("Bluetooth is *not* enabled");
+        }
+    );
 
+
+    function failure(){
+      alert('CONNECTION FAIL BITCH');
+    }
+
+    setInterval(ScanForFriends, 10000);
+
+    function ScanForFriends(){
+      ble.startScan([], function(device) {
+        //alert(device.name+' | '+device.rssi);
+        //if(device.id == "86D46DF4-BF47-15B4-DFDB-AFB2EC7AD143"){
+        //    alert(device.rssi);
+        //}
+        $scope.lieux="Inconnu";
+
+        if(device.id == "86D46DF4-BF47-15B4-DFDB-AFB2EC7AD143" && device.rssi <90){
+          $scope.lieux = "Plaine Image";
+
+          //$state.go($state.current, {}, {reload: true});
+        }
+
+        //$http.post("", {"lieux" : lieux});
+      }, failure);
+    }
 
   });
 })

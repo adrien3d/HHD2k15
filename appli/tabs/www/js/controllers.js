@@ -1,7 +1,9 @@
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function($scope, FriendsNearby) {
+.controller('HomeCtrl', function($state, $scope, FriendsNearby) {
     $scope.friends = FriendsNearby.all();
+    $scope.lieux = "Inconnu";
+
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -77,6 +79,7 @@ angular.module('starter.controllers', [])
     });
 })
 
+
 /*.controller('AccountCtrl', function($scope) {
   $scope.settings = {
     //enableFriends: true
@@ -125,7 +128,6 @@ angular.module('starter.controllers', [])
         }
     });
 })
-
 .controller('EventDetailCtrl', function($scope, Events) {  
     $scope.evenemet = Events.get($stateParams.eventId);
 })
@@ -280,4 +282,3 @@ angular.module('starter.controllers', [])
         });
     }
 })*/
-
