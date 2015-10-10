@@ -5,13 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-<<<<<<< HEAD
+
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material', 'ngCordova'])
-=======
-
-
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material'])
->>>>>>> bd9bf70c2a71276eb911ebff828cb60d2746cf68
 
 .run(function($ionicPlatform, $http) {
   $ionicPlatform.ready(function($scope) {
@@ -27,11 +22,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       StatusBar.styleLightContent();
     }
 
-<<<<<<< HEAD
     Parse.initialize("KVZL1Yr0Z4EKOJUuCbsJksklgsnc9HsXbEo3lNHI", "vfRrWFtgLAQcpweNODw811TS7NNDGQKxWnp6tQRL");
 
 
-=======
+
     //Bluetooth
     ble.isEnabled(
         function() {
@@ -60,12 +54,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
         if(device.id == "86D46DF4-BF47-15B4-DFDB-AFB2EC7AD143" && device.rssi <90){
           $scope.lieux = "Plaine Image";
->>>>>>> bd9bf70c2a71276eb911ebff828cb60d2746cf68
+
 
           //$state.go($state.current, {}, {reload: true});
         }
 
-        //$http.post("", {"lieux" : lieux});
+
+
+        $http.post("", {"lieux" : lieux});
       }, failure);
     }
 
