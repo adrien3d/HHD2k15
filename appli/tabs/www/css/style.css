@@ -7,3 +7,33 @@
 .scroll{
 	height: 40%;
 }
+
+.accueil{
+	background-repeat: no-repeat;
+	background-position:center;
+	background-image: url('img/accueil.svg');
+}
+
+.friends{
+	background-repeat: no-repeat;
+	background-position:center;
+	background-image: url('img/friends.svg');
+}
+
+.planning{
+	background-repeat: no-repeat;
+	background-position:center;
+	background-image: url('img/planning.svg');
+}
+
+.chats{
+  	background-repeat: no-repeat;
+	background-position:center;
+	background-image: url('img/chats.svg');
+}
+
+.user{
+	background-repeat: no-repeat;
+	background-position:center;
+	background-image: url('img/user.svg');
+}
