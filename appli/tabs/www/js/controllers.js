@@ -51,7 +51,7 @@ angular.module('starter.controllers', [])
 
 
 
-<<<<<<< HEAD
+
 
 .controller('AccountCtrl', function($scope, $http) {
     $http({
@@ -74,12 +74,12 @@ angular.module('starter.controllers', [])
             };
 
             window.localStorage['user'] = JSON.stringify(user);
-            console.log(user);
+            $("#token").text(token);
         }
     });
 });
 
-=======
+
 /*
 .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
     $scope.data = {};
@@ -95,4 +95,4 @@ angular.module('starter.controllers', [])
         });
     }
 })*/
->>>>>>> ce9d8d4e9e05f669641d6531d495451677a73973
+
