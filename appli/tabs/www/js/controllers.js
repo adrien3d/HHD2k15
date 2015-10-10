@@ -108,13 +108,42 @@ angular.module('starter.controllers', [])
     }
 })
 
+.controller('MapController', function($scope, $ionicLoading) {
+        
+ //   google.maps.event.addDomListener(window, 'load', function() {
+        var myLatlng = new google.maps.LatLng(0, 0);
+ console.log("po");
+        var mapOptions = {
+            center: myLatlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+ 
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+        console.log(map);
+ 
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+            var myLocation = new google.maps.Marker({
+                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+                map: map,
+                title: "My Location"
+            });
+        });
+ 
+        $scope.map = map;
+ //   });
+ 
+})
+
+/*
 .controller('MapController', function($scope, $http, $ionicModal,$ionicLoading, FriendsNearby) {
-    FriendsNearby.all().then(function(data) {
-            $scope.friends = data;
-        }
-    );
-
+    // FriendsNearby.all().then(function(data) {
+    //         $scope.friends = data;
+    //     }
+    // );
+    console.log("hello");
     google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);
         var mapOptions = {
@@ -205,14 +234,9 @@ angular.module('starter.controllers', [])
         };
 
 
-})
-
-
-/*.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    //enableFriends: true
-  };
 })*/
+
+
 
 .controller('GroupesCtrl', function($scope) {})
 
@@ -235,6 +259,7 @@ angular.module('starter.controllers', [])
 
 //connexion
 .controller('SigninCtrl', function($scope, $http, $state) {
+    window.localStorage['user'] = 'null';
      $scope.loginEmail = function(email, password) {
       $http({
             method: 'POST',
@@ -320,12 +345,12 @@ angular.module('starter.controllers', [])
 
 .controller('AccountCtrl', function($scope, $http, $state) {
      $scope.logout = function() {
-    
         window.localStorage['user'] = 'null';
         $state.go('login');
-
     };
 
+
+console.log(JSON.parse(window.localStorage["user"]).email);
  
     $http({
                 method: 'GET',
