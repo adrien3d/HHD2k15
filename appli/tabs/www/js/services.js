@@ -70,33 +70,10 @@ app.factory('CalculateDistance', function (lat1, lng1, lat2, lng2){
   return d;
 });
 
-app.factory('FriendsNearby', function($http) {
-
-  var data_headers =
-  {"Content-Type" : "application/x-www-form-urlencoded"};
-
-  console.log(data_headers);
-
-  console.log(JSON.parse(window.localStorage['user']).token);
-  $http.get(encodeURI('http://46.101.218.111/api/v1/user?user_email='+ JSON.parse(window.localStorage["user"]).email+'&user_token=' +JSON.parse(window.localStorage["user"]).token));
-    /*method: 'GET',
-    url: "http://46.101.218.111/api/v1/user",
-    headers: data_headers,
-    data: {
-      user_email: JSON.parse(window.localStorage["user"]).email,
-      user_token: JSON.parse(window.localStorage["user"]).token
-    }
-  }).success(function(data, status, a) {
-    if (status == 200)
-    {
-      console.log(data);
-
-    }
-  });*/
-
+app.factory('FriendsNearby', function() {
   var friends = [{
     id: 0,
-    user-status: 0,
+    type: 0,
     name: 'Maxence Henneron',
     distance: 1200,
     face: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/005/073/292/1632362.jpg',
@@ -127,10 +104,20 @@ app.factory('FriendsNearby', function($http) {
       return friends;
     },
     getFromApi: function() {
-      /*return $http.post("https://www.yoursite.com/users").then(function(response){
-        users = response;
-        return users;
-      });*/
+      $http({
+        method: 'POST',
+        url: "http://46.101.218.111/api/v1/nearby",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-User-Token': JSON.parse(window.localStorage['user']).token
+        }
+    }).success(function(data, status, a) {
+        if (status == 200)
+        {
+            var UsersNearby = data.UsersNearby;
+            return FriendsNearby;
+        }
+    });
     },
     get: function(friendId) {
       for (var i = 0; i < friends.length; i++) {
@@ -142,6 +129,7 @@ app.factory('FriendsNearby', function($http) {
     }
   };
 });
+
 /*
 .service('LoginService', function($q) {
     return {
