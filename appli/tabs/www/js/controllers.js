@@ -105,9 +105,21 @@ angular.module('starter.controllers', [])
 
 .controller('AproposCtrl', function($scope) {})
 
+.controller('LoginCtrl', function($scope, $ionicPopup, $state) {
+    if (window.localStorage['user'] != 'null')
+    {
+        //user connecté
+        $state.go('tab.home');
+    }
+})
+
+.controller('SigninCtrl', function($scope, $http, $state) {
+})
+
+
 .controller('SignupCtrl', function($scope, $http, $state) {
  $scope.signupEmail = function(email, password, firstname, lastname) {
-       
+        
         if (email != "" && password != "") {
             $http({
                 method: 'POST',
@@ -121,9 +133,10 @@ angular.module('starter.controllers', [])
                     'user[last_name]': lastname,
                     'user[first_name]': firstname
                 })
-            }).success(function(data, status, a) {
-                if (status == 200) {
-                    console.log(data);
+            }).success(function(data, status) {
+                console.log(status);
+                if (status == 201) {
+                    alert("Tout va bien");
                     var token = data.token;
                     var email = data.email;
                     var user = {
@@ -131,9 +144,15 @@ angular.module('starter.controllers', [])
                         token: token
                     };
                     window.localStorage['user'] = JSON.stringify(user);
-                    $("#token").text(token);
+                    $state.go('tab.home');
+                }else{
+                    alert("Problème");
                 }
+            }).error(function(data, status) {
+                alert("Problème");
             });
+
+            
         }
 
     }   
@@ -142,8 +161,13 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('AccountCtrl', function($scope, $http) {
-        $http({
+.controller('AccountCtrl', function($scope, $http, $state) {
+     $scope.logout = function() {
+    
+        window.localStorage['user'] = 'null';
+        $state.go('login');
+    }
+     $http({
             method: 'POST',
             url: "http://46.101.218.111/api/v1/auth",
             headers: {
@@ -305,18 +329,4 @@ angular.module('starter.controllers', [])
 });
 
 
-/*
-.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
-    $scope.data = {};
- 
-    $scope.login = function() {
-        LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data) {
-            $state.go('tab.dash');
-        }).error(function(data) {
-            var alertPopup = $ionicPopup.alert({
-                title: 'Login failed!',
-                template: 'Please check your credentials!'
-            });
-        });
-    }
-})*/
+

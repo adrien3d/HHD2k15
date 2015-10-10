@@ -7,8 +7,12 @@ Rails.application.routes.draw do
       post '/user/search' => 'user#search'
       resources :user, except: [:delete, :new, :edit]
       resources :user_position, except: [:delete, :new, :edit, :update, :destroy]
-      resources :invites, except: [:delete, :new, :edit, :update]
-      get '/invites/requests' => 'invites#requests'
+      resources :friends
+      resources :invites, except: [:delete, :new, :edit, :update] do
+        get 'accept' => 'invites#accept'
+        get 'deny' => 'invites#deny'
+      end
+      get 'requests' => 'invites#requests'
     end
   end
 end
