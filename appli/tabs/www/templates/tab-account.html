@@ -1,11 +1,27 @@
+<script>
+  switch({{user.statut}}
+  	case "type:0" : document.getElementById(statut).value = 0;
+  	break;
+  	case "type:1" : document.getElementById(statut).value = 1;
+  	break;
+   	case "type:2" : document.getElementById(statut).value = 2;
+  	break;)
+ </script>
+
 <ion-view view-title="Compte">
   <ion-content>
     <ion-list>
     	<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
 	        <img ng-src="{{user.face}}"> <!-- A changer -->
 	        <h1>Mon Compte</h1>
-	        <h2>NOM : {{user.name}}</h2>
-	        <p> Statut : {{user.type}} </p>
+	        <h2>NOM : {{user.name}}</h2>	     
+	        <p> Statut : 
+	        	<select id="statut">
+	        		<option value = "type:0">Indisponible</option>
+	        		<option value = "type:1">Envie de sortir</option>
+					<option value = "type:2">En soirée</option>
+	        	</select>
+	        </p>
 	        <i class="icon ion-chevron-right icon-accessory"></i>
 	    </ion-item>
 	    <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/tab/groupes">

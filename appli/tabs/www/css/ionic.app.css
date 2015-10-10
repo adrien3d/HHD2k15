@@ -7699,3 +7699,31 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+
+/*STYLE PERSO*/
+
+ion-content.padding.scroll-content.ionic-scroll.has-header.has-tabs > div:nth-child(1) > div:nth-child(n) > h1:nth-child(1) {
+padding-left:10px;
+}
+ion-content.padding.scroll-content.ionic-scroll.has-header.has-tabs > div:nth-child(1) > div:nth-child(n) > h1:nth-child(1)::before {
+content:"•";
+padding-right:10px;
+font-size:50px;
+
+}
+
+ion-content.padding.scroll-content.ionic-scroll.has-header.has-tabs > div:nth-child(1) > div:nth-child(1) > h1:nth-child(1)::before {
+color: #E8A629;
+}
+ion-content.padding.scroll-content.ionic-scroll.has-header.has-tabs > div:nth-child(1) > div:nth-child(2) > h1:nth-child(1)::before {
+color: #1A9E0B;
+}
+ion-content.padding.scroll-content.ionic-scroll.has-header.has-tabs > div:nth-child(1) > div:nth-child(3) > h1:nth-child(1)::before {
+color: #888484;
+}
+
+
+ion-content.padding.scroll-content.ionic-scroll.has-header.has-tabs > div:nth-child(1) > div:nth-child(n) > h1:nth-child(1)::after{
+    background-image: url('/img/design/line.png');background-repeat: repeat-x;background-position-y: center;
+}
