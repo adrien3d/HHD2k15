@@ -25,18 +25,22 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlanningSearchCtrl', function($scope, $stateParams, $http){
+  var data_headers = 
+            {"Content-Type" : "application/x-www-form-urlencoded"};
+        
+        console.log(data_headers);
+  
+
   $scope.email = $stateParams.email;
   console.log(JSON.parse(window.localStorage['user']).token);
      $http({
         method: 'POST',
         url: "http://46.101.218.111/api/v1/user/search",
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-User-Token': JSON.parse(window.localStorage['user']).token,
-            'X-User-Email': JSON.parse(window.localStorage['user']).email
-        },
+        headers: data_headers,
         data: $.param({
-            email:  $stateParams.email
+            email:  $stateParams.email,
+            user_email: JSON.parse(window.localStorage["user"]).email,
+            user_token: JSON.parse(window.localStorage["user"]).token
         })
     }).success(function(data, status, a) {
         if (status == 200)
