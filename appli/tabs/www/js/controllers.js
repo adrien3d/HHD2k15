@@ -1,12 +1,19 @@
 angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($state, $scope, FriendsNearby) {
+
     navigator.geolocation.getCurrentPosition(function(position) {
         $scope.lat = position.coords.latitude;
         $scope.lng = position.coords.longitude;
     });
 
-    $scope.friends = FriendsNearby.all($scope.lat, $scope.lng);
+    //$scope.friends = FriendsNearby.all($scope.lat, $scope.lng);
+
+    FriendsNearby.all().then(function(data) {
+            $scope.friends = data;
+        }
+    );
+
     $scope.lieux = "Inconnu";
 })
 
@@ -68,6 +75,7 @@ angular.module('starter.controllers', [])
 
 .controller('MapController', function($scope, $http, $ionicLoading, FriendsNearby) {
     $scope.friends = FriendsNearby.all();
+
     google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);
         var mapOptions = {
@@ -113,10 +121,43 @@ angular.module('starter.controllers', [])
     }
 })
 
+
+//connexion
 .controller('SigninCtrl', function($scope, $http, $state) {
+     $scope.signupEmail = function(email, password) {
+      $http({
+            method: 'POST',
+            url: "http://46.101.218.111/api/v1/auth",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: $.param({
+                'email': email,
+                'password': password
+            })
+        }).success(function(data, status, a) {
+            if (status == 200) {
+                var token = data.token;
+                var user = {
+                    email: email,
+                    token: token
+                };
+
+                window.localStorage['user'] = JSON.stringify(user);
+
+                alert("Connexion réussie");
+                $state.go('tab.home');
+            }else if (status == 404){
+                alert("Utilisateur inconnu");
+            }else if (status == 500){
+                alert("Mauvais mot de passe");
+            }
+        });
+    }
 })
 
 
+//inscription
 .controller('SignupCtrl', function($scope, $http, $state) {
  $scope.signupEmail = function(email, password, firstname, lastname) {
         
@@ -147,9 +188,11 @@ angular.module('starter.controllers', [])
                     $state.go('tab.home');
                 }else{
                     alert("Problème");
+                    alert(data);
                 }
             }).error(function(data, status) {
-                alert("Problème");
+                alert("Problème xhr");
+                alert(data);
             });
 
             
@@ -167,28 +210,7 @@ angular.module('starter.controllers', [])
         window.localStorage['user'] = 'null';
         $state.go('login');
     }
-     $http({
-            method: 'POST',
-            url: "http://46.101.218.111/api/v1/auth",
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            data: $.param({
-                email: 'scockedey@hotmail.fr',
-                password: 'bitebite'
-            })
-        }).success(function(data, status, a) {
-            if (status == 200) {
-                var token = data.token;
-                var user = {
-                    email: 'scockedey@hotmail.fr',
-                    token: token
-                };
-
-                window.localStorage['user'] = JSON.stringify(user);
-                $("#token").text(token);
-            }
-        });
+   
     })
     .controller('EventDetailCtrl', function($scope, Events) {
         $scope.evenemet = Events.get($stateParams.eventId);

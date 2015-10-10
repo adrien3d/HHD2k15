@@ -70,56 +70,55 @@ app.factory('CalculateDistance', function (lat1, lng1, lat2, lng2){
   return d;
 });
 
-app.factory('FriendsNearby', function() {
-  var friends = [{
-    id: 0,
-    type: 0,
-    name: 'Maxence Henneron',
-    distance: 1200,
-    face: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/005/073/292/1632362.jpg',
-    lat:50.70,
-    lng:3.16
-  }, {
-    id: 1,
-    type: 1,
-    name: 'Elie Alawoe',
-    distance: 8200,
-    face: 'https://i.vimeocdn.com/portrait/8889425_300x300.jpg'
-  },{
-    id: 2,
-    type: 1,
-    name: 'Sebastien Cockedey',
-    distance: 8200,
-    face: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/4/005/0ae/3ea/1144fd7.jpg'
-  }, {
-    id: 3,
-    type: 2,
-    name: 'Adrien Chapelet',
-    distance: 15200,
-    face: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/005/062/3d9/3598455.jpg'
-  }];
 
-  return {
-    all: function(lat, lng) {
-      return friends;
+app.service('FriendsNearby', function($http, $q) {
+
+  var data_headers =
+  {"Content-Type" : "application/x-www-form-urlencoded"};
+
+  console.log(data_headers);
+
+  console.log(JSON.parse(window.localStorage['user']).token);
+
+  var service = {
+    friends: [],
+    all: function () {
+
+      var def = $q.defer();
+
+      $http.get(encodeURI('http://46.101.218.111/api/v1/user?user_email=' + JSON.parse(window.localStorage["user"]).email + '&user_token=' + JSON.parse(window.localStorage["user"]).token))
+          .success(function (users) {
+            console.log(users);
+
+            users.forEach(function (user) {
+              //console.log(user);
+              service.friends.push({
+                id: user.id,
+                user_status: user.user_status,
+                name: user.last_name + " " + user.first_name,
+                //distance: user.distance,
+                face: user.face
+              })
+            });
+
+            //console.log(service.friends);
+            def.resolve(service.friends);
+          })
+          .error(function () {
+            def.reject('Impossible de recupérer les projets');
+          });
+
+      return def.promise;
+      //return service.friends;
     },
-    getFromApi: function() {
-      $http({
-        method: 'POST',
-        url: "http://46.101.218.111/api/v1/nearby",
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-User-Token': JSON.parse(window.localStorage['user']).token
-        }
-    }).success(function(data, status, a) {
-        if (status == 200)
-        {
-            var UsersNearby = data.UsersNearby;
-            return FriendsNearby;
-        }
-    });
+    getFromApi: function () {
+      /*return $http.post("https://www.yoursite.com/users").then(function(response){
+       users = response;
+       return users;
+       });*/
+
     },
-    get: function(friendId) {
+    get: function (friendId) {
       for (var i = 0; i < friends.length; i++) {
         if (friends[i].id === parseInt(friendId)) {
           return friends[i];
@@ -128,6 +127,9 @@ app.factory('FriendsNearby', function() {
       return null;
     }
   };
+
+  return service;
+
 });
 
 /*

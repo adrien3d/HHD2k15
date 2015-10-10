@@ -49,9 +49,9 @@ class Api::V1::UserController < Api::V1::ApiController
     end
   end
 
-  def show
+  def profile
     begin
-      user = User.find(params[:id])
+      user = current_user
       render status: 200, json: user
     rescue ActiveRecord::RecordNotFound
       render status: 404, json: {error: "User doesn't exist"}
@@ -67,6 +67,6 @@ class Api::V1::UserController < Api::V1::ApiController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :access_token, :facebook_id, :description, :last_name, :email, :address, :birthdate, :sex, :telephone_number, :password)
+    params.require(:user).permit(:first_name, :access_token, :facebook_id, :description, :last_name, :email, :address, :birthdate, :sex, :telephone_number, :password, :user_status, :face)
   end
 end
