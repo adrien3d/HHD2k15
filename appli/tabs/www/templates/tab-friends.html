@@ -3,3 +3,17 @@
       <div id='map' data-tap-disabled="true"></div>
       </ion-content>
 </ion-view>
+
+<ion-view view-title="Friends">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="friend in friends" type="item-text-wrap" href="#/tab/friends/{{friend.id}}">
+        <img ng-src="{{friend.face}}">
+        <h2>{{friend.name}}</h2>
+        <p>{{friend.lastText}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
