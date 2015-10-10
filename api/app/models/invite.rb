@@ -3,13 +3,8 @@ class Invite < ActiveRecord::Base
 
   validates_uniqueness_of :user_id, scope: :friend_id
 
-  def user
-
-  end
-
   def as_json(options = { })
-    h = Hash.new
-    h[:id] = id
+    h = super(:only => [:id])
     h[:sender] = User.find(user_id).as_json(except: :authentication_token)
     h[:receiver] = User.find(friend_id).as_json(except: :authentication_token)
     h
