@@ -36,4 +36,8 @@ class User < ActiveRecord::Base
   has_many :user_positions
   has_many :invites
   has_many :friends
+
+  def last_position
+    user_positions.last
+  end
 end
