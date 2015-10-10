@@ -127,7 +127,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'tab-planning': {
         templateUrl: 'templates/tab-planning.html',
-        controller: 'PlanningCtrl'
+        controller: 'CalendarCtrl'
       }
     }
   })
