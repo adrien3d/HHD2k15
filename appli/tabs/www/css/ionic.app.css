@@ -3114,9 +3114,10 @@ a.subdued {
       background-image: linear-gradient(180deg, #0a9dc7, #0a9dc7 50%, transparent 50%); }
   .bar.bar-assertive {
     border-color: #e42112;
-    background-color: #ef473a;
+    background-color: #BC5717;
     background-image: linear-gradient(0deg, #e42112, #e42112 50%, transparent 50%);
-    color: #fff; }
+    color: #fff;
+    }
     .bar.bar-assertive .title {
       color: #fff; }
     .bar.bar-assertive.bar-footer {
@@ -4164,7 +4165,8 @@ ion-tabs.tabs-color-active-dark .tab-item {
 .tab-item .icon {
   display: block;
   margin: 0 auto;
-  height: 25px;
+  height: 27px;
+  width: 100%;
   font-size: 32px;
   margin-top: 5px;
   }
@@ -7742,13 +7744,13 @@ ion-content.padding.scroll-content.ionic-scroll.has-header.has-tabs > div:nth-ch
 .tabs .tab-item .icon.accueil{
 	background-repeat: no-repeat;
 	background-position:center;
-	background-image: url('/img/accueil.svg');
+	background-image: url('/img/home.svg');
 }
 
 .tabs .tab-item .icon.friends{
 	background-repeat: no-repeat;
 	background-position:center;
-	background-image: url('/img/group.svg');
+	background-image: url('/img/friends.svg');
 }
 
 .tabs .tab-item .icon.planning{
