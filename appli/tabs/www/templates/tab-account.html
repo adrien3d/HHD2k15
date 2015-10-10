@@ -1,12 +1,3 @@
-<script>
-  switch({{users.user_status}}
-  	case "type:0" : document.getElementById(statut).value = 0;
-  	break;
-  	case "type:1" : document.getElementById(statut).value = 1;
-  	break;
-   	case "type:2" : document.getElementById(statut).value = 2;
-  	break;)
-</script>
 
 <ion-view view-title="Compte">
 	<ion-nav-bar class="bar-assertive">
@@ -16,9 +7,9 @@
   <ion-content>
     <ion-list>
     	<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
-	        <img ng-src="{{user.face}}"> <!-- A changer -->
+	        <img ng-src="{{data.face}}"> <!-- A changer -->
 	        <h1>Mon Compte</h1>
-	        <h2>NOM : {{user_name}}</h2>	     
+	        <h2>{{data.username}}</h2>	     
 	        <p> Statut : 
 	       
 	        </p>
