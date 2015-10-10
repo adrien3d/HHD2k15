@@ -37,6 +37,18 @@ class Api::V1::UserController < Api::V1::ApiController
     end
   end
 
+  def search
+    begin
+      user = User.find_by_email(params[:email])
+
+      if user
+        render status: 200, json: {user: user}
+      else
+        render status: 500, json: {error: "User wasn't found"}
+      end
+    end
+  end
+
   def show
     begin
       user = User.find(params[:id])

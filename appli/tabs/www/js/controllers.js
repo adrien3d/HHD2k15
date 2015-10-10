@@ -1,8 +1,10 @@
 angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($scope) {})
-
-.controller('FriendsCtrl', function($scope) {})
+/*
+.controller('FriendsCtrl', function($scope, FriendsNearby) {
+    $scope.friends = FriendsNearby.all();
+})*/
 
 .controller('ChatsCtrl', function($scope, Chats) {
     // With the new view caching in Ionic, Controllers are only called
@@ -49,6 +51,7 @@ angular.module('starter.controllers', [])
 
 
 
+<<<<<<< HEAD
 
 .controller('AccountCtrl', function($scope, $http) {
     $http({
@@ -76,3 +79,20 @@ angular.module('starter.controllers', [])
     });
 });
 
+=======
+/*
+.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
+    $scope.data = {};
+ 
+    $scope.login = function() {
+        LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data) {
+            $state.go('tab.dash');
+        }).error(function(data) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Login failed!',
+                template: 'Please check your credentials!'
+            });
+        });
+    }
+})*/
+>>>>>>> ce9d8d4e9e05f669641d6531d495451677a73973

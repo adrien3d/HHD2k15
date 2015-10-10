@@ -11,10 +11,10 @@ password
 ---
 Utilisé pour créer un utilisateur
 
-email
-password
-name
-surname
+user[email]
+user[password]
+user[last_name]
+user[first_name]
 
 ## GET	/api/v1/user/:id
 Affiche les infos de l'user
@@ -42,3 +42,9 @@ Pareil que patch
 ---
 # DELETE	/api/v1/user/:id
 Supprime un utilisateur (id dans l'adresse)
+
+## POST	/api/v1/user/search
+---
+Utilisé pour chercher un utilisateur
+
+email

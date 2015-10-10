@@ -22,6 +22,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
 
 
+
   });
 })
 
@@ -52,12 +53,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.friends', {
-    url: '/friends',
+  .state('tab.map', {
+    url: '/map',
     views: {
-      'tab-friends': {
-        templateUrl: 'templates/tab-friends.html',
-        controller: 'FriendsCtrl'
+      'tab-map': {
+        templateUrl: 'templates/tab-map.html',
+        controller: 'MapController'
       }
     }
   })
@@ -100,6 +101,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   });
+/*
+  .state('login', {
+      url: '/login',
+      templateUrl: 'templates/login.html'
+      controller: 'LoginCtrl'
+  })*/
 
   // if none of the above states are matched, use this as the fallback
 

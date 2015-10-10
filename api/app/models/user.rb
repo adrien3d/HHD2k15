@@ -34,4 +34,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates_presence_of :first_name, :last_name
+
+  has_many :user_positions
+  has_many :invites
 end
