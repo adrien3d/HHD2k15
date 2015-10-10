@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009221853) do
+ActiveRecord::Schema.define(version: 20151010073745) do
 
   create_table "invites", force: :cascade do |t|
     t.integer  "user_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20151009221853) do
     t.string   "sex"
     t.date     "birthdate"
     t.date     "description"
+    t.string   "lieu"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token"
