@@ -35,4 +35,5 @@ class User < ActiveRecord::Base
 
   has_many :user_positions
   has_many :invites
+  has_many :friends
 end
