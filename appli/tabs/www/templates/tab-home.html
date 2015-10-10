@@ -1,81 +1,83 @@
-
 <ion-view view-title="Party">
-  <ion-content class="padding">
+    <ion-content class="padding">
 
-
-          <p> Statut : 
-          <div class="list">
-        <label class="item item-radio">
-          <input type="radio" name="group">
-          <div class="item-content">
-            Indisponible
-          </div>
-          <i class="radio-icon ion-checkmark"></i>
-        </label>
-        <label class="item item-radio">
-          <input type="radio" name="group">
-          <div class="item-content">
-            Envie de sortir
-          </div>
-           <i class="radio-icon ion-checkmark"></i>
-        </label>
-        <label class="item item-radio">
-          <input type="radio" name="group">
-          <div class="item-content">
-            En soirée
-          </div>
-           <i class="radio-icon ion-checkmark"></i>
-        </label>
-
-
-      </div>
-          </p>
-
-
-    <div class="list card" >
-    <h1>En soirée</h1>
-      <ion-list>
-          <ion-item ng-repeat="friend in friends | filter:{user_status:2}">
-            <div class="item-avatar item-icon-right" type="item-text-wrap">
-              <img ng-src="{{friend.face}}">
-              <h2 >{{friend.name}}</h2>
-              <p >à <b>{{friend.distance/1000}} km</b> <br />
-              Lieux : <span ng-model="lieux">{{ lieux }}</span>
-              </p>
-              <i  class="icon ion-chevron-right icon-accessory"></i>
+        <div class='cart'>
+            <div class="item item-divider">
+                Status
             </div>
-          </ion-item>
-      </ion-list>
-    </div>
+            <div class="item item-text-wrap">
+                <div class="list">
+                    <label class="item item-radio">
+                        <input type="radio" name="group">
+                        <div class="item-content">
+                            Indisponible
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" name="group">
+                        <div class="item-content">
+                            Envie de sortir
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" name="group">
+                        <div class="item-content">
+                            En soirée
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
 
-    <div class="list card" >
-      <h1>A envie de sortir</h1>
-      <ion-list>
-          <ion-item ng-repeat="friend in friends | filter:{user_status:1}">
-            <div class="item-avatar item-icon-right" type="item-text-wrap" >
-              <img ng-src="{{friend.face}}">
-              <h2 >{{friend.name}}</h2>
-              <p >à <b>{{friend.distance/1000}} km</b></p>
-              <i  class="icon ion-chevron-right icon-accessory"></i>
+
+                </div>
             </div>
-          </ion-item>
-      </ion-list>
-    </div>
 
-    <div class="list card">
-      <h1>Indisponible</h1>
-      <ion-list>
-          <ion-item ng-repeat="friend in friends | filter:{user_status:0}">
-            <div class="item-avatar item-icon-right" type="item-text-wrap">
-              <img ng-src="{{friend.face}}">
-              <h2 >{{friend.name}}</h2>
-              <p >à <b>{{friend.distance/1000}} km</b></p>
-              <i  class="icon ion-chevron-right icon-accessory"></i>
+
+            <div class="list card">
+                <h1>En soirée</h1>
+                <ion-list>
+                    <ion-item ng-repeat="friend in friends | filter:{user_status:2}">
+                        <div class="item-avatar item-icon-right" type="item-text-wrap">
+                            <img ng-src="{{friend.face}}">
+                            <h2>{{friend.name}}</h2>
+                            <p>à <b>{{friend.distance/1000}} km</b>
+                                <br /> Lieux : <span ng-model="lieux">{{ lieux }}</span>
+                            </p>
+                            <i class="icon ion-chevron-right icon-accessory"></i>
+                        </div>
+                    </ion-item>
+                </ion-list>
             </div>
-          </ion-item>
-      </ion-list>
-    </div>
+
+            <div class="list card">
+                <h1>A envie de sortir</h1>
+                <ion-list>
+                    <ion-item ng-repeat="friend in friends | filter:{user_status:1}">
+                        <div class="item-avatar item-icon-right" type="item-text-wrap">
+                            <img ng-src="{{friend.face}}">
+                            <h2>{{friend.name}}</h2>
+                            <p>à <b>{{friend.distance/1000}} km</b></p>
+                            <i class="icon ion-chevron-right icon-accessory"></i>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </div>
+
+            <div class="list card">
+                <h1>Indisponible</h1>
+                <ion-list>
+                    <ion-item ng-repeat="friend in friends | filter:{user_status:0}">
+                        <div class="item-avatar item-icon-right" type="item-text-wrap">
+                            <img ng-src="{{friend.face}}">
+                            <h2>{{friend.name}}</h2>
+                            <p>à <b>{{friend.distance/1000}} km</b></p>
+                            <i class="icon ion-chevron-right icon-accessory"></i>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </div>
 
 
-  </ion-content>
+    </ion-content>
 </ion-view>
