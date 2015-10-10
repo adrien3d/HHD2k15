@@ -42,7 +42,7 @@ class Api::V1::UserController < Api::V1::ApiController
       user = User.find_by_email(params[:email])
 
       if user
-        render status: 200, json: {user: user}
+        render status: 200, json: {user: user}, except: [:authentication_token]
       else
         render status: 500, json: {error: "User wasn't found"}
       end
