@@ -42,7 +42,7 @@ class Api::V1::UserController < Api::V1::ApiController
       user = User.find_by_email(params[:email])
 
       if user
-        render status: 200, json: {user: user}
+        render status: 200, json: {user: user}, except: [:authentication_token]
       else
         render status: 500, json: {error: "User wasn't found"}
       end
@@ -67,6 +67,6 @@ class Api::V1::UserController < Api::V1::ApiController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :description, :last_name, :email, :address, :birthdate, :sex, :telephone_number, :password)
+    params.require(:user).permit(:first_name, :access_token, :facebook_id, :description, :last_name, :email, :address, :birthdate, :sex, :telephone_number, :password)
   end
 end

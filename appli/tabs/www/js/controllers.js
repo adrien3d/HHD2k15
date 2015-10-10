@@ -1,7 +1,12 @@
 angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($state, $scope, FriendsNearby) {
-    $scope.friends = FriendsNearby.all();
+    navigator.geolocation.getCurrentPosition(function(position) {
+      $scope.lat = position.coords.latitude;
+      $scope.lng = position.coords.longitude;
+    });
+
+    $scope.friends = FriendsNearby.all($scope.lat, $scope.lng);
     $scope.lieux = "Inconnu";
 })
 
