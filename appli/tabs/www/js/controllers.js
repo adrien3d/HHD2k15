@@ -68,8 +68,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('AproposCtrl', function($scope) {
-=======
-
+});
 
 
 .controller('AccountCtrl', function($scope, $http) {
@@ -96,7 +95,6 @@ angular.module('starter.controllers', [])
             $("#token").text(token);
         }
     });
->>>>>>> origin/master
 });
 
 
