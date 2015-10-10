@@ -7755,20 +7755,37 @@ a#status_1.button-balanced,a#status_0.button-balanced,a#status_2.button-balanced
     background-color:#F5951D;
 }
 
-.cart > .list.card h1::before {
+.cart > .list.card h1::before,ion-content[ng-controller="MapController"]  div.scroll div.list.card  h1::before {
     content: "•";
     font-size: 38px;
     position: absolute;
-    top: -12px;
+    top: -8px;
     left: 0;
 }
 
-.cart > .list.card:nth-child(3) > h1::before {
+.cart > .list.card:nth-child(3) > h1::before,ion-content[ng-controller="MapController"]  div.scroll > div.list.card:nth-child(2)  h1::before {
         color: #FFB300;
 }
-.cart > .list.card:nth-child(4) > h1::before {
+.cart > .list.card:nth-child(4) > h1::before,ion-content[ng-controller="MapController"]  div.scroll > div.list.card:nth-child(3)  h1::before {
         color: #49DE00;
 }
-.cart > .list.card:nth-child(5) > h1::before {
+.cart > .list.card:nth-child(5) > h1::before,ion-content[ng-controller="MapController"]  div.scroll > div.list.card:nth-child(4)  h1::before {
         color: #989898;
+}
+
+.ref-btn-hp {
+    position: relative;
+    text-align: center;
+}
+
+.btn-hp {
+    max-width: 50%;
+    background-color: transparent!important;
+    color: #F5951D!important;
+    border-color: #F5951D!important;
+    border-radius: 15px;
+}
+.btn-hp:hover:hover {
+    background-color:#F5951D!important;
+    color:#fff !important;
 }
