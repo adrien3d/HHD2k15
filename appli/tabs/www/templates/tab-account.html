@@ -1,12 +1,12 @@
 <script>
-  switch({{user.statut}}
+  switch({{users.user_status}}
   	case "type:0" : document.getElementById(statut).value = 0;
   	break;
   	case "type:1" : document.getElementById(statut).value = 1;
   	break;
    	case "type:2" : document.getElementById(statut).value = 2;
   	break;)
- </script>
+</script>
 
 <ion-view view-title="Compte">
   <ion-content>
@@ -15,6 +15,7 @@
 	        <img ng-src="{{user.face}}"> <!-- A changer -->
 	        <h1>Mon Compte</h1>
 	        <h2>NOM : {{user_name}}</h2>	     
+
 	        <p> Statut : 
 	        	<select id="statut">
 	        		<option value = "type:0">Indisponible</option>
@@ -57,6 +58,12 @@
 	     <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
 	       <button ng-click="logout()" class="button button-assertive">
 			  Déconnexion
+			</button>
+	    </ion-item>
+		<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+	       <button ng-click="findContactsBySearchTerm(maman)" class="button button-royal">
+			  Récupérer contacts
+			  {{contacts}}
 			</button>
 	    </ion-item>
     </ion-list>
