@@ -121,7 +121,7 @@ angular.module('starter.controllers', [])
         var myLatlng = new google.maps.LatLng(0, 0);
         var mapOptions = {
             center: myLatlng,
-            zoom: 16,
+            zoom: 10,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
  
@@ -139,7 +139,11 @@ angular.module('starter.controllers', [])
             });
         });
  
-
+var imageMarqueur = {
+    url: "./img/marker.png",
+    size: new google.maps.Size(30, 48),
+    anchor: new google.maps.Point(15, 45)
+};
 
     var zoneMarqueurs = new google.maps.LatLngBounds();
         for( var i = 0, I = tableauMarqueurs.length; i < I; i++ ) {
@@ -153,7 +157,9 @@ angular.module('starter.controllers', [])
                 var longitude = latlng.lng;
                 var optionsMarqueur = {
                     'map': map,
-                    position: new google.maps.LatLng( latitude, longitude )
+                    position: new google.maps.LatLng( latitude, longitude ),
+                    icon: imageMarqueur
+
                 };
                 var marqueur = new google.maps.Marker( optionsMarqueur );
                 zoneMarqueurs.extend( marqueur.getPosition() );
