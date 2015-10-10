@@ -4164,8 +4164,10 @@ ion-tabs.tabs-color-active-dark .tab-item {
 .tab-item .icon {
   display: block;
   margin: 0 auto;
-  height: 32px;
-  font-size: 32px; }
+  height: 25px;
+  font-size: 32px;
+  margin-top: 5px;
+  }
 
 .tabs-icon-left.tabs .tab-item, .tabs-icon-left > .tabs .tab-item, .tabs-icon-right.tabs .tab-item, .tabs-icon-right > .tabs .tab-item {
   font-size: 10px; }
@@ -7727,3 +7729,50 @@ color: #888484;
 ion-content.padding.scroll-content.ionic-scroll.has-header.has-tabs > div:nth-child(1) > div:nth-child(n) > h1:nth-child(1)::after{
     background-image: url('/img/design/line.png');background-repeat: repeat-x;background-position-y: center;
 }
+
+#map{
+	width: 100%;
+	height: 100%;
+}
+
+.tabs .tab-item .icon.scroll{
+	height: 40%;
+}
+
+.tabs .tab-item .icon.accueil{
+	background-repeat: no-repeat;
+	background-position:center;
+	background-image: url('/img/accueil.svg');
+}
+
+.tabs .tab-item .icon.friends{
+	background-repeat: no-repeat;
+	background-position:center;
+	background-image: url('/img/group.svg');
+}
+
+.tabs .tab-item .icon.planning{
+	background-repeat: no-repeat;
+	background-position:center;
+	background-image: url('/img/calendar.svg');
+}
+
+.tabs .tab-item .icon.chats{
+  	background-repeat: no-repeat;
+	background-position:center;
+	background-image: url('/img/chats.svg');
+}
+
+.tabs .tab-item .icon.user{
+	background-repeat: no-repeat;
+	background-position:center;
+	background-image: url('/img/user.svg');
+}
+
+
+.tabs .tab-item .icon.mail{
+	background-repeat: no-repeat;
+	background-position:center;
+	background-image: url('/img/mail.svg');
+}
+

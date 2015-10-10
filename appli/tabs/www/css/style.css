@@ -11,31 +11,31 @@
 .tabs .tab-item .icon.accueil{
 	background-repeat: no-repeat;
 	background-position:center;
-	background-image: url('img/accueil.svg');
+	background-image: url('/img/accueil.svg');
 }
 
 .tabs .tab-item .icon.friends{
 	background-repeat: no-repeat;
 	background-position:center;
-	background-image: url('img/friends.svg');
+	background-image: url('/img/friends.svg');
 }
 
 .tabs .tab-item .icon.planning{
 	background-repeat: no-repeat;
 	background-position:center;
-	background-image: url('img/planning.svg');
+	background-image: url('/img/planning.svg');
 }
 
 .tabs .tab-item .icon.chats{
   	background-repeat: no-repeat;
 	background-position:center;
-	background-image: url('img/chats.svg');
+	background-image: url('/img/chats.svg');
 }
 
 .tabs .tab-item .icon.user{
 	background-repeat: no-repeat;
 	background-position:center;
-	background-image: url('img/user.svg');
+	background-image: url('/img/user.svg');
 }
 
 
