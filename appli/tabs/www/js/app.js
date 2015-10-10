@@ -103,7 +103,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-   .state('tab.groupes', {
+  .state('tab.groupes', {
     url: '/groupes',
     views: {
       'tab-groupes': {
