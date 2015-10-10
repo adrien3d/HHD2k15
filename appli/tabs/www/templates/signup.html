@@ -7,19 +7,23 @@
         <form>
             <ion-list>
                 <label class="item item-input">
-                    <span class="input-label">Username</span>
-                    <input type="text" placeholder="enter username..." ng-model="data.username">
-                </label>
-                <label class="item item-input">
                     <span class="input-label">Email</span>
-                    <input type="email" placeholder="you@domain.com" ng-model="data.email">
+                    <input type="email" placeholder="toi@domaine.com" ng-model="data.email">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Password</span>
-                    <input type="password" placeholder="At least 6 characters" ng-model="data.password">
+                    <span class="input-label">Mot de passe</span>
+                    <input type="password" placeholder="Pensez à le sécuriser" ng-model="data.password">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Prénom</span>
+                    <input type="text" placeholder="John" ng-model="data.firstname">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Nom</span>
+                    <input type="text" placeholder="Doe" ng-model="data.lastname">
                 </label>
             </ion-list>
-            <button class="button button-stable button-block" ng-click="signupEmail()">Done</button>
+            <button class="button button-stable button-block" ng-click="signupEmail(data.email, data.password, data.firstname, data.lastname)">S'inscire</button>
         </form>
     </ion-content>
 </ion-view>

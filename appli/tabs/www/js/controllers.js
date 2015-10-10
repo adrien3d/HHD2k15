@@ -7,6 +7,24 @@ angular.module('starter.controllers', [])
         $scope.lng = position.coords.longitude;
     });
 
+    console.log("http://46.101.218.111/api/v1/user/" + JSON.parse(window.localStorage["user"]).user_id);
+
+     $http({
+            method: 'GET',
+            url: "http://46.101.218.111/api/v1/profile/",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            params: {
+                    'user_email': JSON.parse(window.localStorage["user"]).email,
+                    'user_token': JSON.parse(window.localStorage["user"]).token
+            }
+        }).success(function(data, status){
+            console.log(data.user_status);
+               $('.button-status').addClass('button-positive').removeClass('button-balanced');
+                $('#status_' + data.user_status).addClass('button-balanced');
+        });
+
     //$scope.friends = FriendsNearby.all($scope.lat, $scope.lng);
 
     FriendsNearby.all().then(function(data) {
@@ -20,7 +38,7 @@ angular.module('starter.controllers', [])
         console.log(status_id);
          $http({
             method: 'PUT',
-            url: "http://46.101.218.111/api/v1/user/9",
+            url: "http://46.101.218.111/api/v1/user/" + JSON.parse(window.localStorage["user"]).user_id,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
@@ -217,7 +235,6 @@ angular.module('starter.controllers', [])
 
 //connexion
 .controller('SigninCtrl', function($scope, $http, $state) {
-    console.log("po");
      $scope.loginEmail = function(email, password) {
       $http({
             method: 'POST',
@@ -234,7 +251,8 @@ angular.module('starter.controllers', [])
                 var token = data.token;
                 var user = {
                     email: email,
-                    token: token
+                    token: token,
+                    user_id: data.id
                 };
 
                 window.localStorage['user'] = JSON.stringify(user);
@@ -274,9 +292,11 @@ angular.module('starter.controllers', [])
                     alert("Tout va bien");
                     var token = data.token;
                     var email = data.email;
+                    var user_id = id;
                     var user = {
                         email: email,
-                        token: token
+                        token: token,
+                        user_id: user_id
                     };
                     window.localStorage['user'] = JSON.stringify(user);
                     $state.go('tab.home');
