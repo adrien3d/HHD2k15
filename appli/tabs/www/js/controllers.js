@@ -1,7 +1,8 @@
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function($scope, FriendsNearby) {
+.controller('HomeCtrl', function($state, $scope, FriendsNearby) {
     $scope.friends = FriendsNearby.all();
+    $scope.lieux = "Inconnu";
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -24,18 +25,22 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlanningSearchCtrl', function($scope, $stateParams, $http){
+  var data_headers = 
+            {"Content-Type" : "application/x-www-form-urlencoded"};
+        
+        console.log(data_headers);
+  
+
   $scope.email = $stateParams.email;
   console.log(JSON.parse(window.localStorage['user']).token);
      $http({
         method: 'POST',
         url: "http://46.101.218.111/api/v1/user/search",
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-User-Token': JSON.parse(window.localStorage['user']).token,
-            'X-User-Email': JSON.parse(window.localStorage['user']).email
-        },
+        headers: data_headers,
         data: $.param({
-            email:  $stateParams.email
+            email:  $stateParams.email,
+            user_email: JSON.parse(window.localStorage["user"]).email,
+            user_token: JSON.parse(window.localStorage["user"]).token
         })
     }).success(function(data, status, a) {
         if (status == 200)
@@ -54,8 +59,7 @@ angular.module('starter.controllers', [])
 })
 
 
-
-.controller('MapController', function($scope, $ionicLoading, FriendsNearby) {
+.controller('MapController', function($scope, $http, $ionicLoading, FriendsNearby) {
     $scope.friends = FriendsNearby.all();
     google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);
@@ -76,6 +80,7 @@ angular.module('starter.controllers', [])
         $scope.map = map;
     });
 })
+
 
 /*.controller('AccountCtrl', function($scope) {
   $scope.settings = {
@@ -98,7 +103,86 @@ angular.module('starter.controllers', [])
 .controller('AproposCtrl', function($scope) {
 })
 
+.controller('LoginCtrl', function($scope, $state, $cordovaFacebook) {
+ 
+  $scope.data = {};
+ 
 
+ 
+$scope.loginFacebook = function(){
+ 
+  $cordovaFacebook.login(["public_profile", "email"]).then(function(success){
+ 
+    console.log(success);
+ 
+    //Need to convert expiresIn format from FB to date
+    var expiration_date = new Date();
+    expiration_date.setSeconds(expiration_date.getSeconds() + success.authResponse.expiresIn);
+    expiration_date = expiration_date.toISOString();
+ 
+    var facebookAuthData = {
+      "id": success.authResponse.userID,
+      "access_token": success.authResponse.accessToken,
+      "expiration_date": expiration_date
+    };
+ 
+    Parse.FacebookUtils.logIn(facebookAuthData, {
+      success: function(user) {
+        console.log(user);
+        if (!user.existed()) {
+          alert("User signed up and logged in through Facebook!");
+        } else {
+          alert("User logged in through Facebook!");
+        }
+      },
+      error: function(user, error) {
+        alert("User cancelled the Facebook login or did not fully authorize.");
+      }
+    });
+ 
+  }, function(error){
+    console.log(error);
+  });
+ 
+};
+
+  $scope.signupEmail = function(){  
+   //Create a new user on Parse
+  var user = new Parse.User();
+  user.set("username", $scope.data.username);
+  user.set("password", $scope.data.password);
+  user.set("email", $scope.data.email);
+ 
+  // other fields can be set just like with Parse.Object
+  user.set("somethingelse", "like this!");
+ 
+  user.signUp(null, {
+    success: function(user) {
+      // Hooray! Let them use the app now.
+      alert("success!");
+    },
+    error: function(user, error) {
+      // Show the error message somewhere and let the user try again.
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
+  };
+ 
+  $scope.loginEmail = function(){
+   Parse.User.logIn($scope.data.username, $scope.data.password, {
+    success: function(user) {
+      // Do stuff after successful login.
+      console.log(user);
+      alert("success!");
+    },
+    error: function(user, error) {
+      // The login failed. Check error to see why.
+      alert("error!");
+    }
+  });
+  };
+ 
+})
 
 .controller('AccountCtrl', function($scope, $http) {
     $http({
@@ -116,7 +200,7 @@ angular.module('starter.controllers', [])
         {
             var token = data.token;
             var user = {
-              email: 'insert@email.fr',
+              email: 'scockedey@hotmail.fr',
               token: token
             };
 
@@ -125,7 +209,6 @@ angular.module('starter.controllers', [])
         }
     });
 })
-
 .controller('EventDetailCtrl', function($scope, Events) {  
     $scope.evenemet = Events.get($stateParams.eventId);
 })
@@ -136,7 +219,7 @@ angular.module('starter.controllers', [])
 
 .controller('CalendarCtrl', function ($scope, $cordovaCalendar) {
 
-  $cordovaCalendar.createCalendar({
+ /* $scope.createCalendar=$cordovaCalendar.createCalendar({
     calendarName: 'Cordova Calendar',
     calendarColor: '#FF0000'
   }).then(function (result) {
@@ -151,7 +234,7 @@ angular.module('starter.controllers', [])
     // error
   });
 
-  $cordovaCalendar.createEvent({
+  $scope.createEvent=$cordovaCalendar.createEvent({
     title: 'Space Race',
     location: 'The Moon',
     notes: 'Bring sandwiches',
@@ -163,7 +246,7 @@ angular.module('starter.controllers', [])
     // error
   });
 
-  $cordovaCalendar.createEventWithOptions({
+/*  $cordovaCalendar.createEventWithOptions({
     title: 'Space Race',
     location: 'The Moon',
     notes: 'Bring sandwiches',
@@ -260,7 +343,7 @@ angular.module('starter.controllers', [])
     // success
   }, function (err) {
     // error
-  });
+  });*/
 
 });
 
@@ -280,4 +363,3 @@ angular.module('starter.controllers', [])
         });
     }
 })*/
-

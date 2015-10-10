@@ -5,10 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
+
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material', 'ngCordova'])
+
+
+.run(function($ionicPlatform, $http) {
+  $ionicPlatform.ready(function($scope) {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -21,9 +24,53 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       StatusBar.styleLightContent();
     }
 
+    Parse.initialize("KVZL1Yr0Z4EKOJUuCbsJksklgsnc9HsXbEo3lNHI", "vfRrWFtgLAQcpweNODw811TS7NNDGQKxWnp6tQRL");
 
 
-  });
+
+    //Bluetooth
+/*    ble.isEnabled(
+        function() {
+          alert("Bluetooth is enabled");
+        },
+        function() {
+          console.log("Bluetooth is *not* enabled");
+          alert("Bluetooth is *not* enabled");
+        }
+    );*/
+
+
+    function failure(){
+      alert('CONNECTION FAIL BITCH');
+    }
+
+  //   setInterval(ScanForFriends, 10000);
+
+  //   function ScanForFriends(){
+  //     ble.startScan([], function(device) {
+  //       //alert(device.name+' | '+device.rssi);
+  //       //if(device.id == "86D46DF4-BF47-15B4-DFDB-AFB2EC7AD143"){
+  //       //    alert(device.rssi);
+  //       //}
+  //       $scope.lieux="Inconnu";
+
+
+  //       if(device.id == "86D46DF4-BF47-15B4-DFDB-AFB2EC7AD143" && device.rssi <90){
+  //         $scope.lieux = "Plaine Image";
+
+
+
+
+  //         //$state.go($state.current, {}, {reload: true});
+  //       }
+
+  //       //$http.post("", {"lieux" : lieux});
+  //     }, failure);
+  //   }
+
+
+
+   });
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -33,6 +80,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
+
+    .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'LoginCtrl'
+  })
+  .state('signup', {
+    url: '/signup',
+    templateUrl: 'templates/signup.html',
+    controller: 'LoginCtrl'
+  })
+
+    .state('signin', {
+    url: '/signin',
+    templateUrl: 'templates/signin.html',
+    controller: 'LoginCtrl'
+  })
 
   // setup an abstract state for the tabs directive
     .state('tab', {
@@ -91,7 +155,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'tab-planning': {
         templateUrl: 'templates/tab-planning.html',
-        controller: 'PlanningCtrl'
+        controller: 'CalendarCtrl'
       }
     }
   })
@@ -185,6 +249,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
+
+
 
 
 /*  .state('login', {
