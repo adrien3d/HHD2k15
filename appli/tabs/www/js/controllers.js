@@ -1,7 +1,5 @@
 angular.module('starter.controllers', [])
 
-
-
 .controller('HomeCtrl', function($state, $scope, FriendsNearby, $http) {
 
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -102,7 +100,12 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('PlanningCtrl', function($scope) {
+.controller('PlanningCtrl', function($scope, $state) {
+    $scope.search = function(email) {
+        $state.go('tab.search', {
+            email: email
+        });
+    }
 })
 
 
@@ -145,6 +148,7 @@ var imageMarqueur = {
     anchor: new google.maps.Point(15, 45)
 };
 
+
     var zoneMarqueurs = new google.maps.LatLngBounds();
         for( var i = 0, I = tableauMarqueurs.length; i < I; i++ ) {
             ajouteMarqueur( tableauMarqueurs[i] );
@@ -168,6 +172,26 @@ var imageMarqueur = {
             
         $scope.map = map;
  //   });
+
+
+    google.maps.event.addDomListener(window, 'load', function() {
+        var myLatlng = new google.maps.LatLng(0, 0);
+        var mapOptions = {
+            center: myLatlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+            var myLocation = new google.maps.Marker({
+                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+                map: map,
+                title: "My Location"
+            });
+        });
+        $scope.map = map;
+    });
 
 
     //FENETRE MODAL INVITATION
@@ -239,7 +263,14 @@ var imageMarqueur = {
             });
         };
 
-
+        $scope.AcceptInvit = function(id, nom, prenom ){
+            $http.get(encodeURI('http://46.101.218.111/api/v1/invites/'+id+'/accept?user_email=' + JSON.parse(window.localStorage["user"]).email + '&user_token=' + JSON.parse(window.localStorage["user"]).token))
+                .success(function (data, status) {
+                    if(status == "200" || status == "201") {
+                        alert("Vous êtes maintenant avec "+ prenom +" "+ nom +" !");
+                    }
+                })
+    }
 })
 
 
@@ -345,6 +376,8 @@ var imageMarqueur = {
 })
 
 
+
+
 .controller('AccountCtrl', function($scope, $http, $state) {
      $scope.logout = function() {
         window.localStorage['user'] = 'null';
@@ -352,7 +385,7 @@ var imageMarqueur = {
     };
 
 
-console.log(JSON.parse(window.localStorage["user"]).email);
+
  
     $http({
                 method: 'GET',
@@ -365,8 +398,8 @@ console.log(JSON.parse(window.localStorage["user"]).email);
                     'user_token': JSON.parse(window.localStorage["user"]).token
                 }
             }).success(function(data, status) {
-                console.log(data);
-                console.log(status);
+
+
                 if (status == 200 ) {
                     $scope.user_name = data.first_name + " " + data.last_name; 
 
@@ -381,7 +414,7 @@ console.log(JSON.parse(window.localStorage["user"]).email);
 
 
     .controller('EventDetailCtrl', function($scope, Events) {
-        $scope.evenement = Events.get($stateParams.eventId);
+        $scope.evenemet = Events.get($stateParams.eventId);
     })
 
 .controller('AmiDetailCtrl', function($scope, $stateParams, Friends) {
