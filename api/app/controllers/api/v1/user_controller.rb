@@ -58,6 +58,13 @@ class Api::V1::UserController < Api::V1::ApiController
     end
   end
 
+  def index
+    begin
+      user = User.all
+      render status: 200, json: user, except: [:authentication_token]
+    end
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :description, :last_name, :email, :address, :birthdate, :sex, :telephone_number, :password)
