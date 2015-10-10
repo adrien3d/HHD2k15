@@ -100,15 +100,16 @@ if(!(ionic.Platform.isIOS() || ionic.Platform.isAndroid())){
   // Each state's controller can be found in controllers.js
   $stateProvider
 
+  
     .state('login', {
-    url: '/login',
+    url: '/',
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl'
   })
   .state('signup', {
     url: '/signup',
     templateUrl: 'templates/signup.html',
-    controller: 'LoginCtrl'
+    controller: 'SignupCtrl'
   })
 
     .state('signin', {
@@ -280,7 +281,7 @@ if(!(ionic.Platform.isIOS() || ionic.Platform.isAndroid())){
 
   // if none of the above states are matched, use this as the fallback
 
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('/');
 
   /*$urlRouterProvider.otherwise('/tab/dash');
       var params = {
