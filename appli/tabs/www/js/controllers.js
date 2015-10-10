@@ -1,12 +1,19 @@
 angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($state, $scope, FriendsNearby) {
+
     navigator.geolocation.getCurrentPosition(function(position) {
         $scope.lat = position.coords.latitude;
         $scope.lng = position.coords.longitude;
     });
 
-    $scope.friends = FriendsNearby.all($scope.lat, $scope.lng);
+    //$scope.friends = FriendsNearby.all($scope.lat, $scope.lng);
+
+    FriendsNearby.all().then(function(data) {
+            $scope.friends = data;
+        }
+    );
+
     $scope.lieux = "Inconnu";
 })
 
@@ -68,6 +75,7 @@ angular.module('starter.controllers', [])
 
 .controller('MapController', function($scope, $http, $ionicLoading, FriendsNearby) {
     $scope.friends = FriendsNearby.all();
+
     google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);
         var mapOptions = {
