@@ -4,35 +4,35 @@
 	height: 100%;
 }
 
-.scroll{
+.tabs .tab-item .icon.scroll{
 	height: 40%;
 }
 
-.accueil{
+.tabs .tab-item .icon.accueil{
 	background-repeat: no-repeat;
 	background-position:center;
 	background-image: url('img/accueil.svg');
 }
 
-.friends{
+.tabs .tab-item .icon.friends{
 	background-repeat: no-repeat;
 	background-position:center;
 	background-image: url('img/friends.svg');
 }
 
-.planning{
+.tabs .tab-item .icon.planning{
 	background-repeat: no-repeat;
 	background-position:center;
 	background-image: url('img/planning.svg');
 }
 
-.chats{
+.tabs .tab-item .icon.chats{
   	background-repeat: no-repeat;
 	background-position:center;
 	background-image: url('img/chats.svg');
 }
 
-.user{
+.tabs .tab-item .icon.user{
 	background-repeat: no-repeat;
 	background-position:center;
 	background-image: url('img/user.svg');
