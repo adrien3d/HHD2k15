@@ -70,7 +70,7 @@ app.service('FriendsNearby', function($http, $q) {
     all: function () {
 
       var def = $q.defer();
-
+      
       $http.get(encodeURI('http://46.101.218.111/api/v1/friends?user_email=' + JSON.parse(window.localStorage["user"]).email + '&user_token=' + JSON.parse(window.localStorage["user"]).token))
           .success(function (users) {
             //console.log(users);
@@ -118,7 +118,6 @@ app.service('FriendsNearby', function($http, $q) {
           $http.get(encodeURI('http://46.101.218.111/api/v1/requests?user_email=' + JSON.parse(window.localStorage["user"]).email + '&user_token=' + JSON.parse(window.localStorage["user"]).token))
               .success(function (invitations) {
                   service.invitations = [];
-                  //console.log(invitations);
 
                   invitations.forEach(function (invitation) {
                       //console.log(user);

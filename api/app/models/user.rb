@@ -38,6 +38,6 @@ class User < ActiveRecord::Base
   has_many :friends
 
   def last_position
-    user_positions.last
+    self.user_positions.last
   end
 end

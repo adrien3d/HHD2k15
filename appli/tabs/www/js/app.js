@@ -10,6 +10,7 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material', 'ngCordova'])
 
 
+
 .run(function($ionicPlatform, $http) {
   $ionicPlatform.ready(function($scope) {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -81,8 +82,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
-  
     .state('login', {
     url: '/',
     templateUrl: 'templates/login.html',
@@ -106,8 +105,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     abstract: true,
     templateUrl: 'templates/tabs.html'
   })
-
-
+    .state('param', {
+    url: '/param',
+    abstract: true,
+    templateUrl: 'templates/params.html'
+  })
 
 
   // Each tab has its own nav history stack:
@@ -128,6 +130,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       'tab-map': {
         templateUrl: 'templates/tab-map.html',
         controller: 'MapController'
+      }
+    }
+  })
+
+    .state('tab.map.user', {
+    url: '/map/:user_id',
+    views: {
+      'tab-map-user': {
+        templateUrl: 'templates/tab-map-user.html',
+        controller: 'MapUserCtrl'
       }
     }
   })
@@ -182,7 +194,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.groupes', {
+  .state('param.groupes', {
     url: '/groupes',
     views: {
       'tab-groupes': {
@@ -192,7 +204,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-    .state('tab.historique', {
+    .state('param.historique', {
     url: '/historique',
     views: {
       'tab-historique': {
@@ -202,7 +214,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   }) 
 
-.state('tab.gestioncompte', {
+.state('param.gestioncompte', {
     url: '/gestioncompte',
     views: {
       'tab-gestioncompte': {
@@ -212,7 +224,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-.state('tab.parametres', {
+.state('param.parametres', {
     url: '/parametres',
     views: {
       'tab-parametres': {
@@ -222,7 +234,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   }) 
 
- .state('tab.apropos', {
+ .state('param.apropos', {
     url: '/apropos',
     views: {
       'tab-apropos': {
@@ -269,7 +281,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     console.log(device.name);
     console.log(device.address);
   });*/
-});
+})
+;
+// Only required for development in browser, not cordova!
+
+
+document.addEventListener('deviceready', function () {
+    // Android customization
+    cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.'});
+    // Enable background mode
+    cordova.plugins.backgroundMode.enable();
+
+    // Called when background mode has been activated
+    cordova.plugins.backgroundMode.onactivate = function () {
+        setTimeout(function () {
+            // Modify the currently displayed notification
+            cordova.plugins.backgroundMode.configure({
+                text:'Running in background for more than 5s now.'
+            });
+        }, 5000);
+    }
+}, false);
 
 
 
