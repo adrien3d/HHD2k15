@@ -130,10 +130,7 @@ angular.module('starter.controllers', [])
     var tableauMarqueurs = [{
         lat: 50.7011216,
         lng: 3.15806
-    }, {
-        lat: 50.701229,
-        lng: 3.15836
-    }, ];
+    } ];
 
 
     $http({
@@ -150,19 +147,21 @@ angular.module('starter.controllers', [])
         if (status == 200) {
 
             $.each(data, function(index, user) {
-                //        console.log(user);
+              //  console.log(user);
                 if (user.last_position != null) {
+                   // console.log(user.last_position);
                     var coords = {
                         "lat": parseFloat(user.last_position.latitude),
-                        "lng": parseFloat(user.last_position.latitude)
+                        "lng": parseFloat(user.last_position.longitude)
                     };
                     tableauMarqueurs.push(coords);
+                  //      console.log(coords);
                 }
             });
         }
     });
 
-    console.log(tableauMarqueurs);
+  //  console.log(tableauMarqueurs);
 
 
 
@@ -191,9 +190,15 @@ angular.module('starter.controllers', [])
         anchor: new google.maps.Point(15, 45)
     };
 
-
+    
     var zoneMarqueurs = new google.maps.LatLngBounds();
-    for (var i = 0, I = tableauMarqueurs.length; i < I; i++) {
+
+    console.log(tableauMarqueurs); 
+    console.log(tableauMarqueurs.length);
+    
+    console.log(tableauMarqueurs); 
+    for (var i = 0; i < tableauMarqueurs.length; i++) {
+        console.log("it");
         ajouteMarqueur(tableauMarqueurs[i]);
     }
     map.fitBounds(zoneMarqueurs);
@@ -210,31 +215,10 @@ angular.module('starter.controllers', [])
         };
         var marqueur = new google.maps.Marker(optionsMarqueur);
         zoneMarqueurs.extend(marqueur.getPosition());
+       // console.log(latlng);
     }
 
-
-    $scope.map = map;
     //   });
-
-
-    google.maps.event.addDomListener(window, 'load', function() {
-        var myLatlng = new google.maps.LatLng(0, 0);
-        var mapOptions = {
-            center: myLatlng,
-            zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-        navigator.geolocation.getCurrentPosition(function(pos) {
-            map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-            var myLocation = new google.maps.Marker({
-                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-                map: map,
-                title: "My Location"
-            });
-        });
-        $scope.map = map;
-    });
 
 
     //FENETRE MODAL INVITATION
