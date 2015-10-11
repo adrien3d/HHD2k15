@@ -25,10 +25,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       StatusBar.styleLightContent();
     }
 
-//    Parse.initialize("OyrdgIFVES0sarbrtni7htyIeqnVrplO8VG0e7TD", "2ak6tbmwsrsOwbq7e3BvV63Jb9g1HY946yBoWqQg");
-
- 
-
 
     //Bluetooth
 /*    ble.isEnabled(
