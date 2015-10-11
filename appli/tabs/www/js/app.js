@@ -10,6 +10,7 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material', 'ngCordova'])
 
 
+
 .run(function($ionicPlatform, $http) {
   $ionicPlatform.ready(function($scope) {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -270,7 +271,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     console.log(device.name);
     console.log(device.address);
   });*/
-});
+})
+;
+// Only required for development in browser, not cordova!
 
 
 document.addEventListener('deviceready', function () {
