@@ -1,10 +1,6 @@
 {
   "name": "tabs",
-<<<<<<< HEAD
-  "app_id": "30c142ed",
-=======
   "app_id": "8142b525",
->>>>>>> cc37a3ee45db269ae83318308d5bda2bfa22d02e
   "gulpStartupTasks": [
     "sass",
     "watch"
