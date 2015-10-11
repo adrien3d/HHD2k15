@@ -15,7 +15,7 @@ angular.module('starter.controllers', [])
 .controller('HomeCtrl', function($state, $scope, FriendsNearby, $http) {
 
     $scope.goToMyFriend = function(user_id){
-        $state.go("tab.map.user", {'user_id': user_id});
+        $state.go("tab.see.user", {'user_id': user_id});
     };
 
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -322,9 +322,10 @@ angular.module('starter.controllers', [])
 
 .controller('LoginCtrl', function($scope, $ionicPopup, $state) {
 
+console.log(window.localStorage['user'] );
     if (window.localStorage['user'] != 'null') {
         //user connecté
-        //   $state.go('tab.home');
+           $state.go('tab.home');
     }
 
     $scope.loginFacebook = function() {
