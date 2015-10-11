@@ -8,11 +8,8 @@
     </ion-nav-bar>
  <ion-content ng-controller="MapController">
       <div id='map' data-tap-disabled="true"></div>
-
-        <div class="list card" >
-        <h1>En soirée</h1>
           <ion-list>
-              <ion-item ng-repeat="friend in friends | filter:{type:2}">
+              <ion-item ng-repeat="friend in friends | orderBy:['-distance']">
                 <div class="item-avatar item-icon-right" type="item-text-wrap">
                   <img ng-src="{{friend.face}}">
                   <h2 >{{friend.name}}</h2>
@@ -21,35 +18,6 @@
                 </div>
               </ion-item>
           </ion-list>
-        </div>
-
-        <div class="list card" >
-          <h1>A envie de sortir</h1>
-          <ion-list>
-              <ion-item ng-repeat="friend in friends | filter:{type:1}">
-                <div class="item-avatar item-icon-right" type="item-text-wrap" >
-                  <img ng-src="{{friend.face}}">
-                  <h2 >{{friend.name}}</h2>
-                  <p >à <b>{{friend.distance/1000}} km</b></p>
-                  <i  class="icon ion-chevron-right icon-accessory"></i>
-                </div>
-              </ion-item>
-          </ion-list>
-        </div>
-
-        <div class="list card" >
-          <h1>Indisponible</h1>
-          <ion-list>
-              <ion-item ng-repeat="friend in friends | filter:{type:0}">
-                <div class="item-avatar item-icon-right" type="item-text-wrap">
-                  <img ng-src="{{friend.face}}">
-                  <h2 >{{friend.name}}</h2>
-                  <p >à <b>{{friend.distance/1000}} km</b></p>
-                  <i  class="icon ion-chevron-right icon-accessory"></i>
-                </div>
-              </ion-item>
-          </ion-list>
-        </div>
 
  </ion-content>
 </ion-view>
@@ -58,7 +26,7 @@
     <ion-modal-view>
         <ion-header-bar>
             <h1 class="title">Ajoute un(e) ami(e) !</h1>
-            <a class="ion-close-circled" ng-click="closeModal()" style="margin-top:12px; margin-right:15px "></a>
+            <a class="ion-close-circled" style="float:right" ng-click="closeModal()" style="margin-top:12px; margin-right:15px "></a>
         </ion-header-bar>
         <ion-content class="padding">
             <label class="item item-input">
