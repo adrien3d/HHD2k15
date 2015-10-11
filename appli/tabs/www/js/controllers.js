@@ -130,10 +130,10 @@ angular.module('starter.controllers', [])
 
 
 .controller('MapController', function($scope, $http, $ionicModal, $ionicLoading, FriendsNearby) {
-    // FriendsNearby.all().then(function(data) {
-    //         $scope.friends = data;
-    //     }
-    // );
+     FriendsNearby.all().then(function(data) {
+             $scope.friends = data;
+         }
+     );
 
     var tableauMarqueurs = [{
         lat: 50.7011216,
@@ -303,7 +303,7 @@ angular.module('starter.controllers', [])
         $http.get(encodeURI('http://46.101.218.111/api/v1/invites/' + id + '/accept?user_email=' + JSON.parse(window.localStorage["user"]).email + '&user_token=' + JSON.parse(window.localStorage["user"]).token))
             .success(function(data, status) {
                 if (status == "200" || status == "201") {
-                    alert("Vous êtes maintenant avec " + prenom + " " + nom + " !");
+                    alert("Vous êtes maintenant amis avec " + prenom + " " + nom + " !");
                 }
             })
     }
