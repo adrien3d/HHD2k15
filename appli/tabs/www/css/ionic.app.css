@@ -7744,7 +7744,7 @@ a#status_1,a#status_0,a#status_2 {
     background-color:rgba(0,0,0,0);
     color:#F5951D;
     border-color:#F5951D;
-    font-size:13px;
+    font-size: 2.0vw;
 }
 a#status_2 {
     border-radius: 00px 40px 40px 00px;
@@ -7788,4 +7788,39 @@ a#status_1.button-balanced,a#status_0.button-balanced,a#status_2.button-balanced
 .btn-hp:hover:hover {
     background-color:#F5951D!important;
     color:#fff !important;
+}
+
+.center{
+    padding-top:20px;
+    text-align:center;
+}
+.border-bottom{
+padding-bottom:20px;
+    max-width:60%;
+    margin:auto;
+    border-bottom:thin solid #BFBFBF;   
+}
+.absolute{
+    position:absolute;
+}
+.filling-gap{
+ display:block;
+    height:80px;
+}
+
+.inner-con {
+    margin-left: 91px;
+}
+
+.calendar img.avatar {
+    position: absolute;
+}
+
+p {
+    margin: 0;
+}
+
+p.infos {
+    font-style: italic;
+    color: #ADADAD;
 }
