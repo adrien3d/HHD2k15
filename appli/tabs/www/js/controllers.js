@@ -247,9 +247,7 @@ console.log("Window");
         var optionsMarqueur = {
             'map': map,
             position: new google.maps.LatLng(latitude, longitude),
-            icon: imageMarqueur,
-            title: 
-
+            icon: imageMarqueur
         };
         var marqueur = new google.maps.Marker(optionsMarqueur);
             bindInfoWindow(marqueur, map, infowindow, firstname);
