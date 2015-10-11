@@ -15,54 +15,53 @@ angular.module('starter.controllers', [])
         $scope.lng = position.coords.longitude;
     });
 
- //   console.log("http://46.101.218.111/api/v1/user/" + JSON.parse(window.localStorage["user"]));
+    //   console.log("http://46.101.218.111/api/v1/user/" + JSON.parse(window.localStorage["user"]));
 
-console.log(window.localStorage["user"]);
-    if (window.localStorage["user"] != null){
-     $http({
+    console.log(window.localStorage["user"]);
+    if (window.localStorage["user"] != null) {
+        $http({
             method: 'GET',
             url: "http://46.101.218.111/api/v1/profile/",
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             params: {
-                    'user_email': JSON.parse(window.localStorage["user"]).email,
-                    'user_token': JSON.parse(window.localStorage["user"]).token
+                'user_email': JSON.parse(window.localStorage["user"]).email,
+                'user_token': JSON.parse(window.localStorage["user"]).token
             }
-        }).success(function(data, status){
+        }).success(function(data, status) {
             console.log(data.user_status);
-               $('.button-status').addClass('button-positive').removeClass('button-balanced');
-                $('#status_' + data.user_status).addClass('button-balanced');
+            $('.button-status').addClass('button-positive').removeClass('button-balanced');
+            $('#status_' + data.user_status).addClass('button-balanced');
         });
 
 
-    //$scope.friends = FriendsNearby.all($scope.lat, $scope.lng);
+        //$scope.friends = FriendsNearby.all($scope.lat, $scope.lng);
 
-    FriendsNearby.all().then(function(data) {
+        FriendsNearby.all().then(function(data) {
             $scope.friends = data;
-        }
-    );
-    
+        });
+
     }
 
-    $scope.statusUpdate = function(status_id){
+    $scope.statusUpdate = function(status_id) {
         $('.button-status').addClass('button-positive').removeClass('button-balanced');
         $('#status_' + status_id).addClass('button-balanced');
         console.log(status_id);
-         $http({
+        $http({
             method: 'PUT',
             url: "http://46.101.218.111/api/v1/user/" + window.localStorage["user_id"],
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             data: $.param({
-                    'user[user_status]': status_id,
-                    'user_email': JSON.parse(window.localStorage["user"]).email,
-                    'user_token': JSON.parse(window.localStorage["user"]).token
+                'user[user_status]': status_id,
+                'user_email': JSON.parse(window.localStorage["user"]).email,
+                'user_token': JSON.parse(window.localStorage["user"]).token
             })
         });
-            
-      };
+
+    };
     $scope.lieux = "Inconnu";
 })
 
@@ -122,97 +121,100 @@ console.log(window.localStorage["user"]);
 })
 
 
-.controller('MapController', function($scope, $http, $ionicModal,$ionicLoading, FriendsNearby) {
+.controller('MapController', function($scope, $http, $ionicModal, $ionicLoading, FriendsNearby) {
     // FriendsNearby.all().then(function(data) {
     //         $scope.friends = data;
     //     }
     // );
 
-    var tableauMarqueurs = [
-    { lat:50.7011216, lng:3.15806 },
-       { lat:50.701229, lng:3.15836 },
-];
+    var tableauMarqueurs = [{
+        lat: 50.7011216,
+        lng: 3.15806
+    }, {
+        lat: 50.701229,
+        lng: 3.15836
+    }, ];
 
 
-     $http({
-            method: 'GET',
-            url: "http://46.101.218.111/api/v1/friends/",
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            params: {
-                    'user_email': JSON.parse(window.localStorage["user"]).email,
-                    'user_token': JSON.parse(window.localStorage["user"]).token
-            }
-        }).success(function(data, status){
-            if (status == 200)
-            {
- 
-                $.each(data, function(index, user) {
-             //        console.log(user);
-                     if (user.last_position != null)
-                     {
-                        var coords = {"lat": parseFloat(user.last_position.latitude), "lng": parseFloat(user.last_position.latitude)};
-                        tableauMarqueurs.push(coords);
-                     }
-                });
-            }
-        });
+    $http({
+        method: 'GET',
+        url: "http://46.101.218.111/api/v1/friends/",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        params: {
+            'user_email': JSON.parse(window.localStorage["user"]).email,
+            'user_token': JSON.parse(window.localStorage["user"]).token
+        }
+    }).success(function(data, status) {
+        if (status == 200) {
 
-        console.log(tableauMarqueurs);
-            
-
-
- //   google.maps.event.addDomListener(window, 'load', function() {
-        var myLatlng = new google.maps.LatLng(0, 0);
-        var mapOptions = {
-            center: myLatlng,
-            zoom: 10,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
- 
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
- 
-        navigator.geolocation.getCurrentPosition(function(pos) {
-            console.log(pos.coords.latitude + ' ' +  pos.coords.longitude);
-            map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-            var myLocation = new google.maps.Marker({
-                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-                map: map,
-                title: "My Location"
+            $.each(data, function(index, user) {
+                //        console.log(user);
+                if (user.last_position != null) {
+                    var coords = {
+                        "lat": parseFloat(user.last_position.latitude),
+                        "lng": parseFloat(user.last_position.latitude)
+                    };
+                    tableauMarqueurs.push(coords);
+                }
             });
+        }
+    });
+
+    console.log(tableauMarqueurs);
+
+
+
+    //   google.maps.event.addDomListener(window, 'load', function() {
+    var myLatlng = new google.maps.LatLng(0, 0);
+    var mapOptions = {
+        center: myLatlng,
+        zoom: 10,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+        var myLocation = new google.maps.Marker({
+            position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+            map: map,
+            title: "My Location"
         });
- 
-var imageMarqueur = {
-    url: "./img/marker.png",
-    size: new google.maps.Size(30, 48),
-    anchor: new google.maps.Point(15, 45)
-};
+    });
+
+    var imageMarqueur = {
+        url: "./img/marker.png",
+        size: new google.maps.Size(30, 48),
+        anchor: new google.maps.Point(15, 45)
+    };
 
 
     var zoneMarqueurs = new google.maps.LatLngBounds();
-        for( var i = 0, I = tableauMarqueurs.length; i < I; i++ ) {
-            ajouteMarqueur( tableauMarqueurs[i] );
-        }
-        map.fitBounds( zoneMarqueurs );
-            
+    for (var i = 0, I = tableauMarqueurs.length; i < I; i++) {
+        ajouteMarqueur(tableauMarqueurs[i]);
+    }
+    map.fitBounds(zoneMarqueurs);
 
-        function ajouteMarqueur( latlng ) {
-                var latitude = latlng.lat;
-                var longitude = latlng.lng;
-                var optionsMarqueur = {
-                    'map': map,
-                    position: new google.maps.LatLng( latitude, longitude ),
-                    icon: imageMarqueur
 
-                };
-                var marqueur = new google.maps.Marker( optionsMarqueur );
-                zoneMarqueurs.extend( marqueur.getPosition() );
-            }
-            
-            
-        $scope.map = map;
- //   });
+    function ajouteMarqueur(latlng) {
+        var latitude = latlng.lat;
+        var longitude = latlng.lng;
+        var optionsMarqueur = {
+            'map': map,
+            position: new google.maps.LatLng(latitude, longitude),
+            icon: imageMarqueur
+
+        };
+        var marqueur = new google.maps.Marker(optionsMarqueur);
+        zoneMarqueurs.extend(marqueur.getPosition());
+    }
+
+
+    $scope.map = map;
+    //   });
 
 
     google.maps.event.addDomListener(window, 'load', function() {
@@ -245,10 +247,9 @@ var imageMarqueur = {
     });
     $scope.openModal = function() {
         FriendsNearby.getInvites().then(function(data) {
-                console.log(data);
-                $scope.Invitations = data;
-            }
-        );
+            console.log(data);
+            $scope.Invitations = data;
+        });
         $scope.modal.show();
     };
     $scope.closeModal = function() {
@@ -267,50 +268,50 @@ var imageMarqueur = {
         // Execute action
     });
 
-        $scope.Invite = function(mail){
-            var data_headers = {
-                "Content-Type": "application/x-www-form-urlencoded"
-            };
-            $http({
-                method: 'POST',
-                url: "http://46.101.218.111/api/v1/user/search",
-                headers: data_headers,
-                data: $.param({
-                    email: mail,
-                    user_email: JSON.parse(window.localStorage["user"]).email,
-                    user_token: JSON.parse(window.localStorage["user"]).token
-                })
-            }).success(function(data, status, a) {
-                if (status == 200 || status == 201) {
-                    $http({
-                        method: 'POST',
-                        url: "http://46.101.218.111/api/v1/invites",
-                        headers: data_headers,
-                        data: $.param({
-                            friend_id: data.user.id,
-                            user_email: JSON.parse(window.localStorage["user"]).email,
-                            user_token: JSON.parse(window.localStorage["user"]).token
-                        })
-                    }).success(function(data, status, a) {
-                        if (status == 200 || status == 201) {
-                            alert("Invitation Envoyée!");
-                        }else{
-                            alert("Impossible d'ajouter cette personne !");
-                        }
-                    });
-                }else{
-                    alert("Impossible d'ajouter cette personne !");
-                }
-            });
+    $scope.Invite = function(mail) {
+        var data_headers = {
+            "Content-Type": "application/x-www-form-urlencoded"
         };
-
-        $scope.AcceptInvit = function(id, nom, prenom ){
-            $http.get(encodeURI('http://46.101.218.111/api/v1/invites/'+id+'/accept?user_email=' + JSON.parse(window.localStorage["user"]).email + '&user_token=' + JSON.parse(window.localStorage["user"]).token))
-                .success(function (data, status) {
-                    if(status == "200" || status == "201") {
-                        alert("Vous êtes maintenant avec "+ prenom +" "+ nom +" !");
+        $http({
+            method: 'POST',
+            url: "http://46.101.218.111/api/v1/user/search",
+            headers: data_headers,
+            data: $.param({
+                email: mail,
+                user_email: JSON.parse(window.localStorage["user"]).email,
+                user_token: JSON.parse(window.localStorage["user"]).token
+            })
+        }).success(function(data, status, a) {
+            if (status == 200 || status == 201) {
+                $http({
+                    method: 'POST',
+                    url: "http://46.101.218.111/api/v1/invites",
+                    headers: data_headers,
+                    data: $.param({
+                        friend_id: data.user.id,
+                        user_email: JSON.parse(window.localStorage["user"]).email,
+                        user_token: JSON.parse(window.localStorage["user"]).token
+                    })
+                }).success(function(data, status, a) {
+                    if (status == 200 || status == 201) {
+                        alert("Invitation Envoyée!");
+                    } else {
+                        alert("Impossible d'ajouter cette personne !");
                     }
-                })
+                });
+            } else {
+                alert("Impossible d'ajouter cette personne !");
+            }
+        });
+    };
+
+    $scope.AcceptInvit = function(id, nom, prenom) {
+        $http.get(encodeURI('http://46.101.218.111/api/v1/invites/' + id + '/accept?user_email=' + JSON.parse(window.localStorage["user"]).email + '&user_token=' + JSON.parse(window.localStorage["user"]).token))
+            .success(function(data, status) {
+                if (status == "200" || status == "201") {
+                    alert("Vous êtes maintenant avec " + prenom + " " + nom + " !");
+                }
+            })
     }
 })
 
@@ -326,14 +327,13 @@ var imageMarqueur = {
 .controller('AproposCtrl', function($scope) {})
 
 .controller('LoginCtrl', function($scope, $ionicPopup, $state) {
-  
-    if (window.localStorage['user'] != 'null')
-    {
+
+    if (window.localStorage['user'] != 'null') {
         //user connecté
-     //   $state.go('tab.home');
+        //   $state.go('tab.home');
     }
 
-    $scope.loginFacebook = function(){
+    $scope.loginFacebook = function() {
         console.log("Soon");
     };
 })
@@ -341,8 +341,8 @@ var imageMarqueur = {
 
 //connexion
 .controller('SigninCtrl', function($scope, $http, $state) {
-     $scope.loginEmail = function(email, password) {
-      $http({
+    $scope.loginEmail = function(email, password) {
+        $http({
             method: 'POST',
             url: "http://46.101.218.111/api/v1/auth",
             headers: {
@@ -370,9 +370,9 @@ var imageMarqueur = {
 
                 alert("Connexion réussie");
                 $state.go('tab.home');
-            }else if (status == 404){
+            } else if (status == 404) {
                 alert("Utilisateur inconnu");
-            }else if (status == 500){
+            } else if (status == 500) {
                 alert("Mauvais mot de passe");
             }
         });
@@ -382,8 +382,8 @@ var imageMarqueur = {
 
 //inscription
 .controller('SignupCtrl', function($scope, $http, $state) {
- $scope.signupEmail = function(email, password, firstname, lastname) {
-        
+    $scope.signupEmail = function(email, password, firstname, lastname) {
+
         if (email != "" && password != "") {
             $http({
                 method: 'POST',
@@ -411,9 +411,9 @@ var imageMarqueur = {
                     console.log(user);
                     console.log(data.token);
                     window.localStorage['user'] = JSON.stringify(user);
-                      window.localStorage['user_id'] = user_id;
+                    window.localStorage['user_id'] = user_id;
                     $state.go('tab.home');
-                }else{
+                } else {
                     alert("Problème");
                     alert(data);
                 }
@@ -421,53 +421,53 @@ var imageMarqueur = {
                 alert("Problème xhr");
                 alert(data);
             });
- 
+
         }
 
-    }   
+    }
 })
 
 
 
 
 .controller('AccountCtrl', function($scope, $http, $state) {
-     $scope.logout = function() {
+    $scope.logout = function() {
         window.localStorage['user'] = 'null';
         $state.go('login');
     };
 
 
 
- 
+
     $http({
-                method: 'GET',
-                url: "http://46.101.218.111/api/v1/profile/",
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                params: {
-                    'user_email': JSON.parse(window.localStorage["user"]).email,
-                    'user_token': JSON.parse(window.localStorage["user"]).token
-                }
-            }).success(function(data, status) {
+        method: 'GET',
+        url: "http://46.101.218.111/api/v1/profile/",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        params: {
+            'user_email': JSON.parse(window.localStorage["user"]).email,
+            'user_token': JSON.parse(window.localStorage["user"]).token
+        }
+    }).success(function(data, status) {
 
 
-                if (status == 200 ) {
-                    $scope.user_name = data.first_name + " " + data.last_name; 
+        if (status == 200) {
+            $scope.user_name = data.first_name + " " + data.last_name;
 
-                }else{
+        } else {
 
-                }
-            }).error(function(data, status) {
+        }
+    }).error(function(data, status) {
 
-            });
-      
+    });
+
 })
 
 
-    .controller('EventDetailCtrl', function($scope, Events) {
-        $scope.evenemet = Events.get($stateParams.eventId);
-    })
+.controller('EventDetailCtrl', function($scope, Events) {
+    $scope.evenemet = Events.get($stateParams.eventId);
+})
 
 .controller('AmiDetailCtrl', function($scope, $stateParams, Friends) {
     $scope.friend = Friends.get($stateParams.friendId);
