@@ -135,7 +135,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   })
 
     .state('tab.see.user', {
-    url: '/:user_id',
+    url: '/map/:user_id',
     views: {
       'tab-see-user': {
         templateUrl: 'templates/tab-see-user.html',

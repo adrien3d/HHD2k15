@@ -213,6 +213,18 @@ angular.module('starter.controllers', [])
     }
     map.fitBounds(zoneMarqueurs);
 
+       var infowindow =  new google.maps.InfoWindow({
+            content: ""
+        });
+console.log("Window");
+
+     function bindInfoWindow(marker, map, infowindow, description) {
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(description);
+                infowindow.open(map, marker);
+            });
+        }
+
 
     function ajouteMarqueur(latlng) {
         var latitude = latlng.lat;
@@ -220,7 +232,8 @@ angular.module('starter.controllers', [])
         var optionsMarqueur = {
             'map': map,
             position: new google.maps.LatLng(latitude, longitude),
-            icon: imageMarqueur
+            icon: imageMarqueur,
+            title: 
 
         };
         var marqueur = new google.maps.Marker(optionsMarqueur);
