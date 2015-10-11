@@ -10,6 +10,10 @@ angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($state, $scope, FriendsNearby, $http) {
 
+    $scope.goToMyFriend = function(user_id){
+        $state.go("tab.map");
+    };
+
     navigator.geolocation.getCurrentPosition(function(position) {
         $scope.lat = position.coords.latitude;
         $scope.lng = position.coords.longitude;
@@ -132,6 +136,8 @@ angular.module('starter.controllers', [])
         lng: 3.15806
     } ];
 
+    var nbPos = 1;
+
 
     $http({
         method: 'GET',
@@ -155,13 +161,14 @@ angular.module('starter.controllers', [])
                         "lng": parseFloat(user.last_position.longitude)
                     };
                     tableauMarqueurs.push(coords);
-                  //      console.log(coords);
+                    nbPos++;
+                    console.log(nbPos);
                 }
             });
         }
-    });
+    
 
-  //  console.log(tableauMarqueurs);
+    console.log(nbPos);
 
 
 
@@ -175,14 +182,14 @@ angular.module('starter.controllers', [])
 
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-    navigator.geolocation.getCurrentPosition(function(pos) {
-        map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-        var myLocation = new google.maps.Marker({
-            position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-            map: map,
-            title: "My Location"
-        });
-    });
+    // navigator.geolocation.getCurrentPosition(function(pos) {
+    //     map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+    //     var myLocation = new google.maps.Marker({
+    //         position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+    //         map: map,
+    //         title: "My Location"
+    //     });
+    // });
 
     var imageMarqueur = {
         url: "./img/marker.png",
@@ -194,10 +201,9 @@ angular.module('starter.controllers', [])
     var zoneMarqueurs = new google.maps.LatLngBounds();
 
     console.log(tableauMarqueurs); 
-    console.log(tableauMarqueurs.length);
-    
-    console.log(tableauMarqueurs); 
-    for (var i = 0; i < tableauMarqueurs.length; i++) {
+    console.log(nbPos);
+
+    for (var i = 0; i < nbPos; i++) {
         console.log("it");
         ajouteMarqueur(tableauMarqueurs[i]);
     }
@@ -218,7 +224,7 @@ angular.module('starter.controllers', [])
        // console.log(latlng);
     }
 
-    //   });
+       });
 
 
     //FENETRE MODAL INVITATION

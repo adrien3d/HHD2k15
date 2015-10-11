@@ -24,6 +24,7 @@
                 <h1>En soirée</h1>
                 <ion-list>
                     <ion-item ng-repeat="friend in friends | filter:{user_status:2}">
+                      <a ng-click="goToMyFriend(friend.id)">
                         <div class="item-avatar item-icon-right" type="item-text-wrap">
                             <img ng-src="{{friend.face}}">
                             <h2>{{friend.name}}</h2>
@@ -32,6 +33,7 @@
                             </p>
                             <i class="icon ion-chevron-right icon-accessory"></i>
                         </div>
+                        </a>
                     </ion-item>
                 </ion-list>
             </div>
@@ -39,13 +41,16 @@
             <div class="list card">
                 <h1>A envie de sortir</h1>
                 <ion-list>
+               
                     <ion-item ng-repeat="friend in friends | filter:{user_status:1}">
+                      <a ng-click="goToMyFriend(friend.id)">
                         <div class="item-avatar item-icon-right" type="item-text-wrap">
                             <img ng-src="{{friend.face}}">
                             <h2>{{friend.name}}</h2>
                             <p>à <b>{{friend.distance/1000}} km</b></p>
                             <i class="icon ion-chevron-right icon-accessory"></i>
                         </div>
+                        </a>
                     </ion-item>
                 </ion-list>
             </div>
@@ -53,13 +58,15 @@
             <div class="list card">
                 <h1>Indisponible</h1>
                 <ion-list>
-                    <ion-item ng-repeat="friend in friends | filter:{user_status:0}">
+                    <ion-item  ng-repeat="friend in friends | filter:{user_status:0}">
+                    <a ng-click="goToMyFriend(friend.id)">
                         <div class="item-avatar item-icon-right" type="item-text-wrap">
                             <img ng-src="{{friend.face}}">
                             <h2>{{friend.name}}</h2>
                             <p>à <b>{{friend.distance/1000}} km</b></p>
                             <i class="icon ion-chevron-right icon-accessory"></i>
                         </div>
+                        </a>
                     </ion-item>
                 </ion-list>
             </div>
