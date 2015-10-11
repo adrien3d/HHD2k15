@@ -137,7 +137,8 @@ angular.module('starter.controllers', [])
 
     var tableauMarqueurs = [{
         lat: 50.7011216,
-        lng: 3.15806
+        lng: 3.15806, 
+        firstname: "Sebastien"
     } ];
 
     var nbPos = 1;
@@ -157,12 +158,13 @@ angular.module('starter.controllers', [])
         if (status == 200) {
 
             $.each(data, function(index, user) {
-              //  console.log(user);
+                console.log(user);
                 if (user.last_position != null) {
                    // console.log(user.last_position);
                     var coords = {
                         "lat": parseFloat(user.last_position.latitude),
-                        "lng": parseFloat(user.last_position.longitude)
+                        "lng": parseFloat(user.last_position.longitude),
+                        "firstname": user.first_name + " " + user.last_name
                     };
                     tableauMarqueurs.push(coords);
                     nbPos++;
@@ -173,6 +175,18 @@ angular.module('starter.controllers', [])
     
 
     console.log(nbPos);
+
+       var infowindow =  new google.maps.InfoWindow({
+            content: ""
+        });
+console.log("Window");
+
+     function bindInfoWindow(marker, map, infowindow, description) {
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(description);
+                infowindow.open(map, marker);
+            });
+        }
 
 
 
@@ -213,17 +227,30 @@ angular.module('starter.controllers', [])
     }
     map.fitBounds(zoneMarqueurs);
 
+       var infowindow =  new google.maps.InfoWindow({
+            content: ""
+        });
+console.log("Window");
+
+     function bindInfoWindow(marker, map, infowindow, description) {
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(description);
+                infowindow.open(map, marker);
+            });
+        }
+
 
     function ajouteMarqueur(latlng) {
         var latitude = latlng.lat;
         var longitude = latlng.lng;
+        var firstname = latlng.firstname;
         var optionsMarqueur = {
             'map': map,
             position: new google.maps.LatLng(latitude, longitude),
             icon: imageMarqueur
-
         };
         var marqueur = new google.maps.Marker(optionsMarqueur);
+            bindInfoWindow(marqueur, map, infowindow, firstname);
         zoneMarqueurs.extend(marqueur.getPosition());
        // console.log(latlng);
     }
