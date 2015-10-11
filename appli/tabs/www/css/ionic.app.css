@@ -7824,3 +7824,11 @@ p.infos {
     font-style: italic;
     color: #ADADAD;
 }
+
+.list.card.calendar {
+    min-height: 66px;
+}
+
+.list.card.calendar:hover {
+    background-color: rgba(0,0,0,0.1);
+}
