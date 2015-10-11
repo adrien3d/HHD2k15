@@ -81,7 +81,7 @@ app.service('FriendsNearby', function($http, $q) {
                 id: user.id,
                 user_status: user.user_status,
                 name: user.last_name + " " + user.first_name,
-                //distance: user.distance,
+                distance: Math.floor((Math.random() * 2000) + 1),
                 face: user.face
               })
             });
