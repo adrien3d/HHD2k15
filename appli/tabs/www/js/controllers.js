@@ -1,5 +1,13 @@
 angular.module('starter.controllers', [])
 
+// .config(function($cordovaFacebookProvider) {
+//   var appID = 930561750336396;
+//   var version = "v2.5"; // or leave blank and default is v2.0
+//   $cordovaFacebookProvider.browserInit(appID, version);
+// })
+
+
+
 .controller('HomeCtrl', function($state, $scope, FriendsNearby, $http) {
 
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -7,8 +15,10 @@ angular.module('starter.controllers', [])
         $scope.lng = position.coords.longitude;
     });
 
-    console.log("http://46.101.218.111/api/v1/user/" + JSON.parse(window.localStorage["user"]).user_id);
+ //   console.log("http://46.101.218.111/api/v1/user/" + JSON.parse(window.localStorage["user"]));
 
+console.log(window.localStorage["user"]);
+    if (window.localStorage["user"] != null){
      $http({
             method: 'GET',
             url: "http://46.101.218.111/api/v1/profile/",
@@ -25,12 +35,15 @@ angular.module('starter.controllers', [])
                 $('#status_' + data.user_status).addClass('button-balanced');
         });
 
+
     //$scope.friends = FriendsNearby.all($scope.lat, $scope.lng);
 
     FriendsNearby.all().then(function(data) {
             $scope.friends = data;
         }
     );
+    
+    }
 
     $scope.statusUpdate = function(status_id){
         $('.button-status').addClass('button-positive').removeClass('button-balanced');
@@ -38,7 +51,7 @@ angular.module('starter.controllers', [])
         console.log(status_id);
          $http({
             method: 'PUT',
-            url: "http://46.101.218.111/api/v1/user/" + JSON.parse(window.localStorage["user"]).user_id,
+            url: "http://46.101.218.111/api/v1/user/" + window.localStorage["user_id"],
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
@@ -114,12 +127,42 @@ angular.module('starter.controllers', [])
     //         $scope.friends = data;
     //     }
     // );
-            
 
     var tableauMarqueurs = [
     { lat:50.7011216, lng:3.15806 },
        { lat:50.701229, lng:3.15836 },
 ];
+
+
+     $http({
+            method: 'GET',
+            url: "http://46.101.218.111/api/v1/friends/",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            params: {
+                    'user_email': JSON.parse(window.localStorage["user"]).email,
+                    'user_token': JSON.parse(window.localStorage["user"]).token
+            }
+        }).success(function(data, status){
+            if (status == 200)
+            {
+ 
+                $.each(data, function(index, user) {
+             //        console.log(user);
+                     if (user.last_position != null)
+                     {
+                        var coords = {"lat": parseFloat(user.last_position.latitude), "lng": parseFloat(user.last_position.latitude)};
+                        tableauMarqueurs.push(coords);
+                     }
+                });
+            }
+        });
+
+        console.log(tableauMarqueurs);
+            
+
+
  //   google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(0, 0);
         var mapOptions = {
@@ -129,8 +172,6 @@ angular.module('starter.controllers', [])
         };
  
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-        console.log(map);
  
         navigator.geolocation.getCurrentPosition(function(pos) {
             console.log(pos.coords.latitude + ' ' +  pos.coords.longitude);
@@ -285,17 +326,21 @@ var imageMarqueur = {
 .controller('AproposCtrl', function($scope) {})
 
 .controller('LoginCtrl', function($scope, $ionicPopup, $state) {
+  
     if (window.localStorage['user'] != 'null')
     {
         //user connecté
-        $state.go('tab.home');
+     //   $state.go('tab.home');
     }
+
+    $scope.loginFacebook = function(){
+        console.log("Soon");
+    };
 })
 
 
 //connexion
 .controller('SigninCtrl', function($scope, $http, $state) {
-    window.localStorage['user'] = 'null';
      $scope.loginEmail = function(email, password) {
       $http({
             method: 'POST',
@@ -309,14 +354,19 @@ var imageMarqueur = {
             })
         }).success(function(data, status, a) {
             if (status == 200) {
+                console.log(data);
+                console.log(data.id);
                 var token = data.token;
+                var user_id = data.id;
                 var user = {
-                    email: email,
-                    token: token,
-                    user_id: data.id
+                    'email': email,
+                    'token': token
                 };
 
+                console.log(user_id);
+
                 window.localStorage['user'] = JSON.stringify(user);
+                window.localStorage['user_id'] = user_id;
 
                 alert("Connexion réussie");
                 $state.go('tab.home');
@@ -351,15 +401,17 @@ var imageMarqueur = {
                 console.log(status);
                 if (status == 201) {
                     alert("Tout va bien");
-                    var token = data.token;
+                    var token = data.authentication_token;
                     var email = data.email;
                     var user_id = data.id;
                     var user = {
-                        email: email,
-                        token: token,
-                        user_id: user_id
+                        "email": email,
+                        "token": token
                     };
+                    console.log(user);
+                    console.log(data.token);
                     window.localStorage['user'] = JSON.stringify(user);
+                      window.localStorage['user_id'] = user_id;
                     $state.go('tab.home');
                 }else{
                     alert("Problème");
