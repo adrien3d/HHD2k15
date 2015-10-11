@@ -134,11 +134,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-    .state('tab.map.user', {
-    url: '/map/:user_id',
+    .state('tab.see.user', {
+    url: '/:user_id',
     views: {
-      'tab-map-user': {
-        templateUrl: 'templates/tab-map-user.html',
+      'tab-see-user': {
+        templateUrl: 'templates/tab-see-user.html',
         controller: 'MapUserCtrl'
       }
     }
