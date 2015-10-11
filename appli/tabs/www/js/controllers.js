@@ -138,7 +138,7 @@ angular.module('starter.controllers', [])
     var tableauMarqueurs = [{
         lat: 50.7011216,
         lng: 3.15806, 
-        firstname: "Sebastien"
+        firstname: "Adrien Chapelet"
     } ];
 
     var nbPos = 1;
