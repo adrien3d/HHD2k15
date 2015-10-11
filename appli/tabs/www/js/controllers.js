@@ -454,11 +454,10 @@ console.log(window.localStorage['user'] );
 
 .controller('AccountCtrl', function($scope, $http, $state) {
     $scope.logout = function() {
+        console.log('p');
         window.localStorage['user'] = 'null';
         $state.go('login');
     };
-
-
 
 
     $http({
@@ -475,7 +474,8 @@ console.log(window.localStorage['user'] );
 
 
         if (status == 200) {
-            $scope.user_name = data.first_name + " " + data.last_name;
+            $scope.username = data.first_name + " " + data.last_name;
+           // $scope.friend = Friends.get($stateParams.friendId);
 
         } else {
 
