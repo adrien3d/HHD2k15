@@ -14,6 +14,14 @@ angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($state, $scope, FriendsNearby, $http) {
 
+    console.log(window.localStorage['user']);
+    if (typeof window.localStorage['user'] == 'undefined') {
+        console.log("toLogin");
+        $state.go('login');
+    }
+
+    console.log(window.localStorage['user']);
+
     $scope.goToMyFriend = function(user_id){
         $state.go("tab.see.user", {'user_id': user_id});
     };
@@ -25,7 +33,7 @@ angular.module('starter.controllers', [])
 
     //   console.log("http://46.101.218.111/api/v1/user/" + JSON.parse(window.localStorage["user"]));
 
-    console.log(window.localStorage["user"]);
+  
     if (window.localStorage["user"] != null) {
         $http({
             method: 'GET',
@@ -349,8 +357,8 @@ console.log("Window");
 
 .controller('LoginCtrl', function($scope, $ionicPopup, $state) {
 
-console.log(window.localStorage['user'] );
-    if (window.localStorage['user'] != 'null') {
+
+    if (typeof window.localStorage['user'] != 'undefined') {
         //user connecté
            $state.go('tab.home');
     }
@@ -475,7 +483,7 @@ console.log(window.localStorage['user'] );
 
         if (status == 200) {
             $scope.username = data.first_name + " " + data.last_name;
-           // $scope.friend = Friends.get($stateParams.friendId);
+            $scope.image = data.face
 
         } else {
 
