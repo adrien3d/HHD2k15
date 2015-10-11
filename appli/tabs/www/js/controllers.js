@@ -7,11 +7,15 @@ angular.module('starter.controllers', [])
 // })
 
 
+.controller('MapUserCtrl', function($state, $scope, $http) {
+    alert("coucou");
+})
+
 
 .controller('HomeCtrl', function($state, $scope, FriendsNearby, $http) {
 
     $scope.goToMyFriend = function(user_id){
-        $state.go("tab.map");
+        $state.go("tab.map.user", {'user_id': user_id});
     };
 
     navigator.geolocation.getCurrentPosition(function(position) {
